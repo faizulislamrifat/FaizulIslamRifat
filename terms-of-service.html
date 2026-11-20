@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Faizul Islam Rifat</title>
+<meta name="description" content="Terms of Service for Faizul Islam Rifat. Transparent client agreements covering video editing production, performance advertising, and consulting engagements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+.legal-card {
+  padding: 36px 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: var(--bg-card);
+  margin-bottom: 28px;
+  transition: border-color var(--transition);
+}
+.legal-card:hover {
+  border-color: var(--border-glass-glow);
+}
+.legal-card h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.legal-card h2 i {
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+.legal-card p {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.legal-card p:last-child {
+  margin-bottom: 0;
+}
+.legal-list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.legal-list li {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+.legal-list li i {
+  color: var(--accent2);
+  margin-top: 4px;
+  font-size: 0.85rem;
+}
+.legal-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(124, 92, 252, 0.12);
+  border: 1px solid rgba(124, 92, 252, 0.25);
+  color: var(--accent2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+@media (max-width: 640px) {
+  .legal-container {
+    padding: 24px 0 60px;
+  }
+  .legal-card {
+    padding: 24px 18px;
+    border-radius: var(--radius);
+  }
+  .legal-card h2 {
+    font-size: 1.25rem;
+  }
+  .legal-card p, .legal-list li {
+    font-size: 0.9rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Ambient Mesh Gradient -->
+<div class="mesh-bg"><div class="orb"></div></div>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="github-projects.html">GitHub Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html">Skills & Stack</a>
+  <a href="github-projects.html">GitHub Projects</a>
+  <a href="contact.html">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<!-- ============================================================
+     MAIN LEGAL CONTENT
+     ============================================================ -->
+<main class="container">
+  
+  <div class="legal-container">
+
+    <!-- Header Section -->
+    <div class="text-center" style="margin-bottom:40px;">
+      <div class="legal-meta-badge">
+        <i class="fas fa-file-contract"></i> Effective Date: November 2026
+      </div>
+      <h1 class="section-title">Terms of <span class="accent">Service</span></h1>
+      <p class="section-subtitle" style="max-width:680px; margin:0 auto;">
+        These Terms of Service outline the professional guidelines, deliverables, and mutual obligations governing our client engagements and consulting services.
+      </p>
+    </div>
+
+    <!-- Section 1: Agreement to Terms -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-handshake"></i> 1. Agreement to Terms</h2>
+      <p>
+        By accessing this website, scheduling a consultation call, or hiring <strong>Faizul Islam Rifat</strong> for video editing production, performance advertising, or web development, you agree to be bound by these Terms of Service and our Privacy Policy.
+      </p>
+      <p>
+        If you disagree with any part of these terms, please do not use our services or submit consultation booking requests.
+      </p>
+    </div>
+
+    <!-- Section 2: Scope of Services -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-layer-group"></i> 2. Professional Services</h2>
+      <p>Faizul Islam Rifat provides the following primary digital growth services:</p>
+      <ul class="legal-list">
+        <li><i class="fas fa-video"></i> <span><strong>Cinematic & Short-Form Video Production:</strong> High-retention editing for YouTube, Reels, TikTok, color grading, sound design, and kinetic typography.</span></li>
+        <li><i class="fas fa-chart-line"></i> <span><strong>Performance Advertising & Growth Funnels:</strong> Meta Ads, Google Ads setup, audience segmentation, CAPI tracking, and ROAS optimization.</span></li>
+        <li><i class="fas fa-code"></i> <span><strong>Web Architecture & Development:</strong> High-speed custom web platforms, e-commerce stores, and conversion landing pages.</span></li>
+        <li><i class="fas fa-calendar-check"></i> <span><strong>1-on-1 Growth Consultations:</strong> Direct video strategy sessions via Google Meet or Zoom.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 3: Booking & Cancellation Policy -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-calendar-alt"></i> 3. Consultations & Scheduling Policy</h2>
+      <p>
+        All 1-on-1 consultation sessions booked through our automated calendar are confirmed upon completion of the booking form.
+      </p>
+      <ul class="legal-list">
+        <li><i class="fas fa-clock"></i> <span><strong>Punctuality:</strong> Strategy calls start promptly at the scheduled time. Meeting links are dispatched automatically via Google Meet.</span></li>
+        <li><i class="fas fa-exchange-alt"></i> <span><strong>Rescheduling:</strong> If you need to reschedule, please provide at least 12 hours advance notice using the calendar link or by contacting us via WhatsApp/email.</span></li>
+        <li><i class="fas fa-times-circle"></i> <span><strong>No-Show Policy:</strong> Sessions missed without prior notice may forfeit the scheduled slot.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 4: Client Responsibilities & Deliverables -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-tasks"></i> 4. Client Responsibilities & Asset Delivery</h2>
+      <p>
+        To ensure prompt delivery and exceptional results, clients are responsible for providing all necessary brand guidelines, raw footage, ad account access, and project assets in a timely manner.
+      </p>
+      <p>
+        Production timelines and milestone deadlines commence only after all prerequisite assets have been received and verified.
+      </p>
+    </div>
+
+    <!-- Section 5: Intellectual Property & Ownership -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-copyright"></i> 5. Intellectual Property Rights</h2>
+      <ul class="legal-list">
+        <li><i class="fas fa-check-circle"></i> <span><strong>Client Ownership:</strong> Upon receipt of full payment, you retain 100% intellectual property ownership and commercial rights to all final video deliverables, marketing graphics, and custom code authored for your project.</span></li>
+        <li><i class="fas fa-check-circle"></i> <span><strong>Portfolio & Case Study Showcase:</strong> Unless an explicit Non-Disclosure Agreement (NDA) has been executed prior to project kickoff, Faizul Islam Rifat reserves the right to showcase the completed work, metrics, and case studies in our verified portfolio.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 6: Payment Terms & Revisions -->
+    <div class="legal-card glass">
+      <h2><i class="fas fa-credit-card"></i> 6. Invoicing & Revision Policy</h2>
+      <p>
+        Project payments are governed by transparent upfront scopes. Standard payment schedules typically require a 50% initial deposit prior to kickoff, with the remaining 50% due upon final milestone delivery and client approval.
+      </p>
+      <ul class="legal-list">
+        <li><i class="fas fa-undo"></i> <span><strong>Revisions:</strong> Each package includes standard revision rounds to refine pacing, text animations, or color grading to your complete satisfaction.</span></li>
+        <li><i class="fas fa-plus-circle"></i> <span><strong>Out-of-Scope Requests:</strong> Additional feature requests or complete concept overhauls outside the agreed scope will be quoted separately before work begins.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section 7: Governing Law & Contact -->
+    <div class="legal-card glass" style="border-color:var(--accent-glow);">
+      <h2><i class="fas fa-gavel"></i> 7. Governing Law & Contact</h2>
+      <p>
+        These Terms of Service are governed by and construed in accordance with the laws of Bangladesh. For any inquiries regarding contracts, terms, or partnerships, please reach out directly:
+      </p>
+      <p style="color:var(--text-primary); font-weight:600;">
+        <strong>Faizul Islam Rifat</strong><br>
+        Email: <a href="mailto:info.faizulislamrifat@gmail.com" style="color:var(--accent2); text-decoration:none;">info.faizulislamrifat@gmail.com</a><br>
+        Location: Dhaka, Bangladesh (GMT+6)<br>
+        WhatsApp: <a href="https://wa.me/8801834581975" target="_blank" style="color:var(--success); text-decoration:none;">+880 1834-581975</a>
+      </p>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="shared.js"></script>
+
+</body>
+</html>

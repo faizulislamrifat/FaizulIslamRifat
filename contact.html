@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Faizul Islam Rifat — Inquiries & Consultations</title>
+<meta name="description" content="Get in touch with Faizul Islam Rifat for video editing, web development, digital marketing, and consultation inquiries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* Contact Page Specific Styles */
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+.contact-side-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.channel-pill-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 24px;
+  text-decoration: none;
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  box-sizing: border-box;
+}
+.channel-pill-card:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
+  background: var(--bg-glass-hover);
+}
+.ch-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.ch-icon.wa { background: rgba(37, 211, 102, 0.15); color: #25d366; }
+.ch-icon.tg { background: rgba(0, 136, 204, 0.15); color: #0088cc; }
+.ch-icon.em { background: rgba(124, 92, 252, 0.15); color: var(--accent); }
+.ch-icon.yt { background: rgba(255, 0, 0, 0.15); color: #ff0000; }
+.ch-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+.ch-content h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+.ch-content p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.copy-mini-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-left: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(124, 92, 252, 0.15);
+  border: 1px solid var(--border-glass-glow);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-main);
+  width: fit-content;
+}
+.copy-mini-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.info-note-card {
+  padding: 24px;
+  border-radius: var(--radius);
+}
+.info-note-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+}
+.info-note-card h4 i { color: var(--accent); }
+.info-note-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Form Styles */
+.inquiry-form-card {
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 60px;
+}
+.inquiry-form-card h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.inquiry-form-card p.form-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+}
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-field label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(124, 92, 252, 0.35);
+  background: rgba(18, 18, 42, 0.8);
+  color: #f5f5ff;
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  transition: border var(--transition), box-shadow var(--transition);
+  box-sizing: border-box;
+}
+.form-field input::placeholder, .form-field textarea::placeholder {
+  color: #a0a0c8 !important;
+  opacity: 1 !important;
+}
+
+.form-field select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+  background: rgba(22, 22, 50, 0.95);
+}
+
+.form-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Submit button unified primary style */
+.inquiry-form-card button[type="submit"] {
+  width: 100% !important;
+  height: 52px !important;
+  padding: 0 32px !important;
+  border-radius: 50px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  background: linear-gradient(135deg, var(--accent), var(--accent3)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 6px 24px var(--accent-glow) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  transition: all var(--transition) !important;
+  margin-top: 10px !important;
+}
+.inquiry-form-card button[type="submit"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px var(--accent-glow) !important;
+}
+
+@media (max-width: 992px) {
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inquiry-form-card {
+    padding: 24px 18px !important;
+  }
+  .channel-pill-card {
+    padding: 16px 14px !important;
+    gap: 14px !important;
+  }
+  .ch-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.3rem !important;
+  }
+  .ch-content h4 {
+    font-size: 0.95rem !important;
+  }
+  .info-note-card {
+    padding: 18px 16px !important;
+  }
+}
+
+/* ============================================================
+   LIVE MEETING & CONSULTATION SCHEDULER STYLES
+   ============================================================ */
+.scheduler-wrapper {
+  margin-bottom: 70px;
+  overflow: hidden;
+}
+.scheduler-card {
+  background: rgba(18, 18, 42, 0.85) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 36px 30px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: clip;
+  border: 1px solid var(--border-glass-glow);
+  box-sizing: border-box;
+  width: 100%;
+}
+.scheduler-card::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+.sched-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+.sched-grid {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+.sched-left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+.host-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+}
+.host-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.sched-step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sched-step-title i {
+  color: var(--accent);
+}
+.duration-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.duration-btn {
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-main);
+}
+.duration-btn:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+.duration-btn.active {
+  background: rgba(124, 92, 252, 0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.duration-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.duration-info p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.duration-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: #fff;
+  white-space: nowrap;
+}
+.platform-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.platform-btn {
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition);
+  font-family: var(--font-main);
+}
+.platform-btn i { font-size: 1.25rem; }
+.platform-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+.platform-btn.active {
+  border-color: var(--accent2);
+  color: #fff;
+  background: rgba(0, 229, 255, 0.15);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+}
+.sched-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+/* Full Interactive Calendar System */
+.cal-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(124, 92, 252, 0.12);
+  border: 1px solid rgba(124, 92, 252, 0.35);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-main);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+.cal-dropdown-trigger:hover {
+  background: rgba(124, 92, 252, 0.25);
+  border-color: var(--accent2);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
+}
+.cal-dropdown-trigger.open {
+  background: linear-gradient(135deg, rgba(124, 92, 252, 0.3), rgba(0, 229, 255, 0.2));
+  border-color: var(--accent2);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+.cal-trigger-chevron {
+  font-size: 0.7rem;
+  color: var(--accent2);
+  transition: transform 0.25s ease;
+}
+.cal-dropdown-trigger.open .cal-trigger-chevron {
+  transform: rotate(180deg);
+}
+.sched-calendar-wrap {
+  display: none;
+  background: var(--bg-surface, #12122b);
+  border: 1px solid var(--border-glass-glow, rgba(124, 92, 252, 0.35));
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+  animation: calSlideDown 0.25s ease forwards;
+}
+.sched-calendar-wrap.open {
+  display: block;
+}
+@keyframes calSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cal-close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-size: 0.8rem;
+  margin-left: 6px;
+}
+.cal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #ff6b6b;
+}
+.cal-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.cal-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cal-controls-right {
+  display: flex;
+  align-items: center;
+}
+.cal-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.8rem;
+}
+.cal-nav-btn:hover {
+  background: rgba(124, 92, 252, 0.2);
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+.cal-month-select {
+  background: var(--bg-surface, #12122b);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font-main);
+  transition: border-color var(--transition);
+}
+.cal-month-select:focus {
+  border-color: var(--accent);
+}
+.cal-month-select option {
+  background: #14142b;
+  color: #fff;
+}
+
+.cal-year-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-surface, #12122b);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 1px 3px;
+}
+.cal-year-btn {
+  width: 22px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all var(--transition);
+}
+.cal-year-btn:hover {
+  background: rgba(124, 92, 252, 0.2);
+  color: var(--accent2);
+}
+.cal-year-input {
+  width: 65px;
+  background: transparent;
+  border: none;
+  color: var(--accent2);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  font-family: var(--font-main);
+  -moz-appearance: textfield;
+}
+.cal-year-input::-webkit-outer-spin-button,
+.cal-year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cal-today-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--accent2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.cal-today-btn:hover {
+  background: var(--accent2);
+  color: #0a0a1a;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.cal-day {
+  min-height: 38px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  position: relative;
+  font-family: var(--font-main);
+  user-select: none;
+}
+.cal-day:hover:not(.other-month) {
+  background: var(--bg-glass-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  color: #fff;
+}
+.cal-day.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent2)) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 16px var(--accent-glow) !important;
+  transform: scale(1.05);
+  z-index: 2;
+}
+.cal-day.today::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--accent2);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 3px;
+}
+.cal-day.active.today::after {
+  background: #ffffff;
+}
+.cal-day.other-month {
+  opacity: 0.28;
+  color: var(--text-muted);
+}
+.cal-day.other-month:hover {
+  opacity: 0.65;
+  background: var(--bg-glass);
+}
+.cal-selected-status {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(124, 92, 252, 0.1);
+  border: 1px solid rgba(124, 92, 252, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cal-selected-status strong {
+  color: var(--accent2);
+  font-weight: 700;
+}
+.date-scroll-wrap {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(255, 255, 255, 0.05);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.date-scroll-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+.date-scroll-wrap::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.date-scroll-wrap::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+.date-pill {
+  flex: 0 0 76px;
+  padding: 14px 8px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-main);
+}
+.date-pill:hover {
+  border-color: var(--accent);
+  background: var(--bg-glass-hover);
+  transform: translateY(-2px);
+}
+.date-pill.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px var(--accent-glow);
+  transform: translateY(-3px);
+}
+.date-pill .day-name { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; opacity: 0.85; }
+.date-pill .day-num { font-size: 1.35rem; font-weight: 800; line-height: 1.1; }
+.date-pill .month-name { font-size: 0.72rem; opacity: 0.75; font-weight: 600; }
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 12px;
+}
+.time-slot-btn {
+  padding: 12px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition);
+  font-family: var(--font-main);
+}
+.time-slot-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-glass-hover);
+}
+.time-slot-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+.timezone-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.booking-modal-overlay {
+  position: fixed; inset: 0; z-index: 3000;
+  background: rgba(8, 8, 20, 0.88);
+  backdrop-filter: blur(18px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.booking-modal-overlay.active { display: flex; }
+.booking-modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  width: 100%;
+  padding: 36px 30px;
+  box-shadow: var(--shadow), 0 0 50px var(--accent-glow);
+  text-align: center;
+  animation: modalPop .3s ease-out;
+  position: relative;
+}
+@keyframes modalPop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.booking-modal .success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(34, 197, 94, 0.15);
+  border: 2px solid #22c55e;
+  color: #22c55e;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; margin: 0 auto 18px;
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+}
+.booking-summary-box {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  text-align: left;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.modal-actions {
+  display: flex; flex-direction: column; gap: 10px;
+}
+@media (max-width: 992px) {
+  .sched-grid { grid-template-columns: 1fr; }
+  .scheduler-card { padding: 26px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mesh-bg"><div class="orb"></div></div>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="github-projects.html">GitHub Projects</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html">Skills & Stack</a>
+  <a href="github-projects.html">GitHub Projects</a>
+  <a href="contact.html" class="active">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<!-- Main Container -->
+<main class="container">
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="badge">
+      <i class="fas fa-paper-plane"></i>
+      <span data-i18n="contact_hero_badge">Direct Communication & Booking</span>
+    </div>
+    <h1 class="section-title" style="margin-top: 14px; margin-bottom: 22px;" data-i18n="contact_hero_title">Let's Build Something <span class="accent">Extraordinary</span></h1>
+    <p class="section-subtitle" data-i18n="contact_hero_subtitle">Have a project in mind, an inquiry, or looking to hire? Drop me a message or connect directly through WhatsApp.</p>
+    <div style="display:flex; justify-content:center; width:100%;">
+      <div class="breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-i18n="nav_contact">Contact</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Meeting & Consultation Scheduler -->
+  <section class="scheduler-wrapper reveal" id="scheduler">
+    <div class="scheduler-card glass">
+      <div class="sched-header">
+        <div class="badge" style="margin-bottom: 12px;">
+          <i class="fas fa-video"></i>
+          <span data-i18n="sched_badge">Live 1-on-1 Video Session</span>
+        </div>
+        <h2 class="section-title" data-i18n="sched_title">Book a Live <span class="accent">Consultation</span></h2>
+        <p class="section-subtitle" style="margin-bottom:0;" data-i18n="sched_subtitle">Select your preferred duration, date, and time slot to lock in a direct video consultation via Google Meet or Zoom.</p>
+      </div>
+
+      <div class="sched-grid">
+        <!-- Left Panel: Host & Configuration -->
+        <div class="sched-left-panel">
+          <div class="host-card">
+            <img src="rifat-photo.jpg" alt="Faizul Islam Rifat" class="host-avatar">
+            <div>
+              <h4 style="font-size:1.05rem; font-weight:700;">Faizul Islam Rifat</h4>
+              <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:4px;">Video & Digital Growth Specialist</p>
+              <span style="font-size:0.75rem; color:#22c55e; font-weight:600;"><i class="fas fa-circle" style="font-size:0.55rem;"></i> Available for Bookings</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Duration -->
+          <div>
+            <div class="sched-step-title"><i class="fas fa-clock"></i> <span data-i18n="sched_step1">1. Choose Session Length</span></div>
+            <div class="duration-selector">
+              <button type="button" class="duration-btn active" data-duration="30">
+                <div class="duration-info">
+                  <h4 data-i18n="dur_30_title">⚡ 30 Min Discovery Call</h4>
+                  <p data-i18n="dur_30_desc">Project scope, feasibility & roadmap</p>
+                </div>
+                <span class="duration-badge" data-i18n="dur_30_badge">Intro Call</span>
+              </button>
+
+              <button type="button" class="duration-btn" data-duration="60">
+                <div class="duration-info">
+                  <h4 data-i18n="dur_60_title">🎯 60 Min Deep-Dive Strategy</h4>
+                  <p data-i18n="dur_60_desc">Channel audit, video pacing & sales funnel</p>
+                </div>
+                <span class="duration-badge" style="background:var(--accent2); color:#000;" data-i18n="dur_60_badge">Deep-Dive</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Platform Selector -->
+          <div>
+            <div class="sched-step-title"><i class="fas fa-desktop"></i> <span data-i18n="sched_step_plat">Preferred Meeting Platform</span></div>
+            <div class="platform-options">
+              <button type="button" class="platform-btn active" data-platform="Google Meet">
+                <i class="fab fa-google" style="color:#ea4335;"></i>
+                <span>Google Meet</span>
+              </button>
+              <button type="button" class="platform-btn" data-platform="Zoom">
+                <i class="fas fa-video" style="color:#2d8cff;"></i>
+                <span>Zoom</span>
+              </button>
+              <button type="button" class="platform-btn" data-platform="WhatsApp Call">
+                <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+                <span>WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Date, Time & Client Form -->
+        <div class="sched-right-panel">
+          <!-- Step 2: Interactive Date Picker with Dropdown Calendar -->
+          <div>
+            <div class="sched-step-title" style="justify-content:space-between; align-items:center;">
+              <span><i class="fas fa-calendar-alt"></i> <span data-i18n="sched_step2">2. Select Date</span></span>
+              <!-- Toggle Button for Full Calendar -->
+              <button type="button" class="cal-dropdown-trigger" id="calToggleBtn" title="Click to open full calendar (12 months & years 2000-5000)">
+                <i class="fas fa-calendar-alt" style="color:var(--accent2);"></i>
+                <span id="calToggleBadge">November 2026</span>
+                <i class="fas fa-chevron-down cal-trigger-chevron" id="calTriggerChevron"></i>
+              </button>
+            </div>
+
+            <!-- Full Calendar Window (Tucked inside, opens on button click) -->
+            <div class="sched-calendar-wrap" id="calDropdownWrap">
+              <!-- Top Navigation & Controls Bar -->
+              <div class="cal-nav-bar">
+                <div class="cal-controls-left">
+                  <button type="button" class="cal-nav-btn" id="calPrevMonth" title="Previous Month" aria-label="Previous Month">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <select class="cal-month-select" id="calMonthSelect" aria-label="Select Month">
+                    <!-- Populated dynamically (12 months) -->
+                  </select>
+                  <div class="cal-year-stepper">
+                    <button type="button" class="cal-year-btn" id="calPrevYear" title="Previous Year" aria-label="Previous Year">
+                      <i class="fas fa-minus" style="font-size:0.65rem;"></i>
+                    </button>
+                    <input type="number" class="cal-year-input" id="calYearInput" min="2000" max="5000" value="2026" title="Enter Year (2000 - 5000)" aria-label="Year">
+                    <button type="button" class="cal-year-btn" id="calNextYear" title="Next Year" aria-label="Next Year">
+                      <i class="fas fa-plus" style="font-size:0.65rem;"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="cal-nav-btn" id="calNextMonth" title="Next Month" aria-label="Next Month">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+
+                <div class="cal-controls-right">
+                  <button type="button" class="cal-today-btn" id="calTodayBtn">
+                    <i class="fas fa-history"></i> <span data-i18n="cal_today">Today</span>
+                  </button>
+                  <button type="button" class="cal-close-btn" id="calCloseBtn" title="Close Calendar">✕</button>
+                </div>
+              </div>
+
+              <!-- Weekdays Row -->
+              <div class="cal-weekdays" id="calWeekdaysHeader">
+                <!-- 7 days header in EN / BN -->
+              </div>
+
+              <!-- Full Month Days Grid -->
+              <div class="cal-grid" id="calDaysGrid">
+                <!-- Days 1..31 rendered in JS -->
+              </div>
+
+              <!-- Selected Date Status Bar -->
+              <div class="cal-selected-status">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <i class="fas fa-check-circle" style="color:var(--accent2);"></i>
+                  <span data-i18n="cal_selected_label">Selected Date:</span>
+                </div>
+                <strong id="calSelectedDateText">Saturday, 21 November 2026</strong>
+              </div>
+            </div>
+
+            <!-- Horizontal Quick Date Pills (Always accessible) -->
+            <div class="date-scroll-wrap" id="dateScrollWrap">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+          <!-- Step 3: Select Time Slot -->
+          <div>
+            <div class="sched-step-title"><i class="fas fa-hourglass-half"></i> <span data-i18n="sched_step3">3. Select Time Slot</span></div>
+            <div class="time-slots-grid" id="timeSlotsGrid">
+              <button type="button" class="time-slot-btn active" data-time="11:00 AM">11:00 AM</button>
+              <button type="button" class="time-slot-btn" data-time="03:00 PM">03:00 PM</button>
+              <button type="button" class="time-slot-btn" data-time="05:30 PM">05:30 PM</button>
+              <button type="button" class="time-slot-btn" data-time="08:00 PM">08:00 PM</button>
+              <button type="button" class="time-slot-btn" data-time="09:30 PM">09:30 PM</button>
+            </div>
+            <div class="timezone-hint">
+              <i class="fas fa-globe-americas"></i>
+              <span data-i18n="sched_tz_hint">Times shown in Dhaka Time (GMT+6) • Adapts to your availability</span>
+            </div>
+          </div>
+
+          <!-- Step 4: Booking Form Details -->
+          <form id="meetingBookingForm" style="margin-top:10px; width:100%; box-sizing:border-box;">
+            <div class="sched-step-title"><i class="fas fa-user-edit"></i> <span data-i18n="sched_step4">4. Your Details</span></div>
+            <div class="form-grid-2" style="margin-bottom:12px;">
+              <div class="form-field" style="margin-bottom:0;">
+                <label data-i18n="lbl_name">Your Name *</label>
+                <input type="text" id="meetClientName" placeholder="John Doe" required>
+              </div>
+              <div class="form-field" style="margin-bottom:0;">
+                <label data-i18n="lbl_email">Email Address *</label>
+                <input type="email" id="meetClientEmail" placeholder="john@example.com" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-bottom:12px;">
+              <div class="form-field" style="margin-bottom:0;">
+                <label data-i18n="lbl_phone">WhatsApp Number *</label>
+                <input type="text" id="meetClientPhone" placeholder="+880 1XXX-XXXXXX" required>
+              </div>
+              <div class="form-field" style="margin-bottom:0;">
+                <label data-i18n="lbl_topic">Meeting Topic *</label>
+                <select id="meetTopic" required>
+                  <option value="Digital Marketing & Performance Ads" selected>Digital Marketing & Performance Ads</option>
+                  <option value="YouTube Channel Strategy & Growth">YouTube Channel Strategy & Growth</option>
+                  <option value="Custom Web Platform & Landing Page">Custom Web Platform & Landing Page</option>
+                  <option value="Full Creative Consultation">Full Creative Consultation</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; height:52px; border-radius:50px; font-weight:700; font-size:1rem; margin-top:12px; box-sizing:border-box;">
+              <i class="fas fa-calendar-check"></i> <span data-i18n="btn_confirm_meet">Confirm & Schedule Meeting</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meeting Confirmed Success Modal -->
+  <div class="booking-modal-overlay" id="bookingSuccessModal">
+    <div class="booking-modal">
+      <div class="success-icon"><i class="fas fa-check"></i></div>
+      <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:8px;" data-i18n="modal_meet_title">Meeting Confirmed! 🎉</h3>
+      <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="modal_meet_sub">Your consultation session has been successfully booked with Faizul Islam Rifat.</p>
+
+      <div class="booking-summary-box">
+        <div><strong>👤 Client:</strong> <span id="sumClientName">-</span></div>
+        <div><strong>📅 Date & Time:</strong> <span id="sumDateTime" style="color:var(--accent); font-weight:700;">-</span></div>
+        <div><strong>⏱️ Duration:</strong> <span id="sumDuration">30 Minutes</span></div>
+        <div><strong>💻 Platform:</strong> <span id="sumPlatform">Google Meet</span></div>
+        <div><strong>📌 Topic:</strong> <span id="sumTopic">-</span></div>
+      </div>
+
+      <div class="modal-actions">
+        <a id="btnGoogleCalendar" href="#" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center;">
+          <i class="fab fa-google"></i> <span data-i18n="btn_add_gcal">Add to Google Calendar</span>
+        </a>
+        <a id="btnWhatsAppConfirm" href="#" target="_blank" class="btn btn-outline" style="width:100%; justify-content:center; border-color:#25d366; color:#25d366;">
+          <i class="fab fa-whatsapp"></i> <span data-i18n="btn_send_wa_meet">Send Details to WhatsApp</span>
+        </a>
+        <button type="button" onclick="closeMeetingModal()" class="btn btn-sm" style="background:transparent; color:var(--text-muted); border:none; margin-top:6px; cursor:pointer;" data-i18n="btn_close">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Grid -->
+  <section class="contact-layout-grid reveal">
+    
+    <!-- Left Column: Channels & Notes -->
+    <div class="contact-side-info">
+      
+      <!-- WhatsApp Direct -->
+      <a href="https://wa.me/8801834581975" target="_blank" class="channel-pill-card glass">
+        <div class="ch-icon wa"><i class="fab fa-whatsapp"></i></div>
+        <div class="ch-content">
+          <h4>WhatsApp</h4>
+          <p>+8801834581975</p>
+        </div>
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/faizulislamrifat" target="_blank" class="channel-pill-card glass">
+        <div class="ch-icon tg"><i class="fab fa-telegram-plane"></i></div>
+        <div class="ch-content">
+          <h4>Telegram</h4>
+          <p>@faizulislamrifat</p>
+        </div>
+      </a>
+
+      <!-- Email Card -->
+      <div class="channel-pill-card glass" style="cursor:default;">
+        <div class="ch-icon em"><i class="fas fa-envelope"></i></div>
+        <div class="ch-content" style="flex-grow:1;">
+          <h4>Email</h4>
+          <p><span id="emailAddr">info.faizulislamrifat@gmail.com</span></p>
+          <div>
+            <button class="copy-mini-btn btn-copy-email" data-i18n="btn_copy"><i class="fas fa-copy"></i> Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facebook Profile -->
+      <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="channel-pill-card glass">
+        <div class="ch-icon" style="background:rgba(24,119,242,0.15); color:#1877f2;"><i class="fab fa-facebook-f"></i></div>
+        <div class="ch-content">
+          <h4>Facebook</h4>
+          <p>faizulislamxifat</p>
+        </div>
+      </a>
+
+      <!-- YouTube Channel -->
+      <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="channel-pill-card glass">
+        <div class="ch-icon yt"><i class="fab fa-youtube"></i></div>
+        <div class="ch-content">
+          <h4>YouTube</h4>
+          <p>@iamfaizulislamrifat</p>
+        </div>
+      </a>
+
+      <!-- LinkedIn Profile -->
+      <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" class="channel-pill-card glass">
+        <div class="ch-icon" style="background:rgba(10,102,194,0.15); color:#0a66c2;"><i class="fab fa-linkedin-in"></i></div>
+        <div class="ch-content">
+          <h4>LinkedIn</h4>
+          <p>in/iamfaizulislamrifat</p>
+        </div>
+      </a>
+
+      <!-- X (Twitter) Profile -->
+      <a href="https://x.com/faizul_rifat" target="_blank" class="channel-pill-card glass">
+        <div class="ch-icon" style="background:rgba(255,255,255,0.1); color:var(--text-primary);"><i class="fab fa-x-twitter"></i></div>
+        <div class="ch-content">
+          <h4>X (Twitter)</h4>
+          <p>@faizul_rifat</p>
+        </div>
+      </a>
+
+      <!-- GitHub Profile -->
+      <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="channel-pill-card glass">
+        <div class="ch-icon" style="background:rgba(124,92,252,0.15); color:var(--accent);"><i class="fab fa-github"></i></div>
+        <div class="ch-content">
+          <h4>GitHub</h4>
+          <p>github.com/faizulislamrifat</p>
+        </div>
+      </a>
+
+      <!-- Response Guarantee -->
+      <div class="info-note-card glass">
+        <h4><i class="fas fa-bolt"></i> <span data-i18n="c_resp_title">Quick Response Guarantee</span></h4>
+        <p data-i18n="c_resp_desc">All project inquiries receive a reply within 2 hours during active business hours (Sunday to Thursday, 10:00 AM – 10:00 PM GMT+6).</p>
+      </div>
+
+      <!-- Location / Timezone -->
+      <div class="info-note-card glass">
+        <h4><i class="fas fa-globe-asia"></i> <span data-i18n="c_loc_title">Global Remote Availability</span></h4>
+        <p data-i18n="c_loc_desc">Based in Dhaka, Bangladesh (GMT+6). Fully equipped to coordinate across US, UK, European, and Gulf timezones.</p>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Project Inquiry Form -->
+    <div class="inquiry-form-card glass">
+      <h2 data-i18n="form_title">Project Inquiry Form</h2>
+      <p class="form-subtitle" data-i18n="form_sub">Fill out the details below to receive a custom proposal and quote within 24 hours.</p>
+
+      <form id="detailedContactForm">
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label data-i18n="lbl_name">Your Name *</label>
+            <input type="text" name="name" placeholder="John Doe" required>
+          </div>
+          <div class="form-field">
+            <label data-i18n="lbl_email">Email Address *</label>
+            <input type="email" name="email" placeholder="john@company.com" required>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label data-i18n="lbl_phone">WhatsApp / Phone Number</label>
+            <input type="text" name="phone" placeholder="+880 1XXX-XXXXXX">
+          </div>
+          <div class="form-field">
+            <label data-i18n="lbl_service">Service Needed *</label>
+            <select name="service" required>
+              <option value="" disabled selected data-i18n="opt_select">Select a Service...</option>
+              <option value="Landing Page & Web Design">Landing Page & Web Design</option>
+              <option value="YouTube SEO & Growth">YouTube SEO & Growth</option>
+              <option value="Social Media Branding">Social Media Branding</option>
+              <option value="Cinematic Video Editing">Cinematic Video Editing</option>
+              <option value="Paid Performance Ads">Paid Performance Ads (Meta/FB)</option>
+              <option value="E-Commerce Solutions">E-Commerce Store (WooCommerce)</option>
+              <option value="Full-Stack Digital Package">Full-Stack Digital Package</option>
+              <option value="Other">Other / Custom Request</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label data-i18n="lbl_budget">Estimated Budget Range</label>
+            <select name="budget">
+              <option value="Under $150 / ৳15,000">Under $150 / ৳15,000</option>
+              <option value="$150 - $400 / ৳15,000 - ৳45,000" selected>$150 - $400 / ৳15,000 - ৳45,000</option>
+              <option value="$400 - $800 / ৳45,000 - ৳90,000">$400 - $800 / ৳45,000 - ৳90,000</option>
+              <option value="$800+ / ৳90,000+">$800+ / ৳90,000+</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label data-i18n="lbl_timeline">Expected Timeline</label>
+            <select name="timeline">
+              <option value="Urgent (< 3 days)">Urgent (&lt; 3 days)</option>
+              <option value="1 - 2 Weeks" selected>1 - 2 Weeks</option>
+              <option value="1 Month">1 Month</option>
+              <option value="Flexible / Ongoing">Flexible / Ongoing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label data-i18n="lbl_message">Project Details & Requirements *</label>
+          <textarea name="message" placeholder="Please describe your project, goals, and any relevant links..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
+          <i class="fas fa-paper-plane"></i> <span data-i18n="btn_submit_inquiry">Send Project Inquiry</span>
+        </button>
+      </form>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="shared.js"></script>
+<script>
+// Translations for Contact Page
+window.pageTranslations = {
+  en: {
+    contact_hero_badge: "Direct Communication & Booking",
+    contact_hero_title: 'Let\'s Build Something <span class="accent">Extraordinary</span>',
+    contact_hero_subtitle: "Have a project in mind, an inquiry, or looking to hire? Drop me a message or connect directly through WhatsApp.",
+    btn_copy: "Copy",
+    c_resp_title: "Quick Response Guarantee",
+    c_resp_desc: "All project inquiries receive a reply within 2 hours during active business hours (Sunday to Thursday, 10:00 AM – 10:00 PM GMT+6).",
+    c_loc_title: "Global Remote Availability",
+    c_loc_desc: "Based in Dhaka, Bangladesh (GMT+6). Fully equipped to coordinate across US, UK, European, and Gulf timezones.",
+    sched_badge: "Live 1-on-1 Video Session",
+    sched_title: 'Book a Live <span class="accent">Consultation</span>',
+    sched_subtitle: "Select your preferred duration, date, and time slot to lock in a direct video consultation via Google Meet or Zoom.",
+    sched_step1: "1. Choose Session Length",
+    dur_30_title: "⚡ 30 Min Discovery Call",
+    dur_30_desc: "Project scope, feasibility & roadmap",
+    dur_30_badge: "Intro Call",
+    dur_60_title: "🎯 60 Min Deep-Dive Strategy",
+    dur_60_desc: "Channel audit, video pacing & sales funnel",
+    dur_60_badge: "Deep-Dive",
+    sched_step_plat: "Preferred Meeting Platform",
+    sched_step2: "2. Select Date",
+    sched_step3: "3. Select Time Slot",
+    sched_tz_hint: "Times shown in Dhaka Time (GMT+6) • Adapts to your availability",
+    sched_step4: "4. Your Details",
+    lbl_topic: "Meeting Topic *",
+    btn_confirm_meet: "Confirm & Schedule Meeting",
+    modal_meet_title: "Meeting Confirmed! 🎉",
+    modal_meet_sub: "Your consultation session has been successfully booked with Faizul Islam Rifat.",
+    btn_add_gcal: "Add to Google Calendar",
+    btn_send_wa_meet: "Send Details to WhatsApp",
+    btn_close: "Close",
+    form_title: "Project Inquiry Form",
+    form_subtitle: "Fill out the details below to receive a custom proposal and quote within 24 hours.",
+    lbl_name: "Your Name *",
+    lbl_email: "Email Address *",
+    lbl_phone: "WhatsApp / Phone Number",
+    lbl_service: "Service Needed *",
+    opt_select: "Select a Service...",
+    lbl_budget: "Estimated Budget Range",
+    lbl_timeline: "Expected Timeline",
+    lbl_message: "Project Details & Requirements *",
+    btn_submit_inquiry: "Send Project Inquiry",
+    toast_sent_success: "🎉 Inquiry submitted! I will reply to you within 2 hours.",
+    cal_today: "Today",
+    cal_selected_label: "Selected Date:"
+  },
+  };
+
+// ============================================================
+// GOOGLE CALENDAR & WEBHOOK INTEGRATION
+// Google Apps Script Web App URL
+// ============================================================
+const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyFtPp4KnrihB7pfGfoygrtXH8S6bxs85MJpsO9jgL9eHFNiTzRXxVAzy94ca7lZmbVSA/exec';
+
+// ============================================================
+// MEETING SCHEDULER & FULL INTERACTIVE CALENDAR
+// ============================================================
+let selectedDuration = 30;
+let selectedPlatform = "Google Meet";
+let selectedDateStr = "";
+let selectedTimeStr = "11:00 AM";
+
+const calI18n = {
+  en: {
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    today: 'Today',
+    selected_label: 'Selected Date:'
+  },
+  };
+
+let calYear = 2026;
+let calMonth = 10; // November (0-based)
+let calSelectedYear = 2026;
+let calSelectedMonth = 10;
+let calSelectedDay = 21;
+
+function initCalendar() {
+  const monthSelect = document.getElementById('calMonthSelect');
+  const yearInput = document.getElementById('calYearInput');
+  const weekdaysHeader = document.getElementById('calWeekdaysHeader');
+  if (!monthSelect || !yearInput || !weekdaysHeader) return;
+
+  const isBn = currentLang === 'bn';
+  const data = calI18n[isBn ? 'bn' : 'en'];
+
+  // Populate 12 Months
+  monthSelect.innerHTML = '';
+  data.months.forEach((mName, idx) => {
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = `${(idx + 1).toString().padStart(2, '0')} - ${mName}`;
+    monthSelect.appendChild(opt);
+  });
+
+  // Populate Weekday Headers
+  weekdaysHeader.innerHTML = '';
+  data.weekdays.forEach(wd => {
+    const span = document.createElement('span');
+    span.textContent = wd;
+    weekdaysHeader.appendChild(span);
+  });
+
+  renderCalendarGrid();
+  renderDatePills();
+}
+
+function renderDatePills() {
+  const scrollWrap = document.getElementById('dateScrollWrap');
+  if (!scrollWrap) return;
+
+  scrollWrap.innerHTML = '';
+  const isBn = currentLang === 'bn';
+  const data = calI18n[isBn ? 'bn' : 'en'];
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  let activePillEl = null;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(calYear, calMonth, d);
+    const dayName = data.weekdays[dateObj.getDay()];
+    const monthShort = data.monthsShort[calMonth];
+    const isSelected = (calYear === calSelectedYear && calMonth === calSelectedMonth && d === calSelectedDay);
+
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = `date-pill ${isSelected ? 'active' : ''}`;
+    pill.innerHTML = `
+      <span class="day-name">${dayName}</span>
+      <span class="day-num">${d}</span>
+      <span class="month-name">${monthShort}</span>
+    `;
+
+    pill.addEventListener('click', () => {
+      setCalendarSelection(calYear, calMonth, d);
+      renderCalendarGrid();
+      document.querySelectorAll('#dateScrollWrap .date-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const scrollPos = pill.offsetLeft - (scrollWrap.clientWidth / 2) + (pill.clientWidth / 2);
+      scrollWrap.scrollTo({ left: Math.max(0, scrollPos), behavior: 'smooth' });
+    });
+
+    scrollWrap.appendChild(pill);
+    if (isSelected) activePillEl = pill;
+  }
+
+  // Smooth scroll active pill inside dateScrollWrap only without shifting ancestor card
+  if (activePillEl && scrollWrap) {
+    setTimeout(() => {
+      const scrollPos = activePillEl.offsetLeft - (scrollWrap.clientWidth / 2) + (activePillEl.clientWidth / 2);
+      scrollWrap.scrollTo({ left: Math.max(0, scrollPos), behavior: 'smooth' });
+      const parentCard = scrollWrap.closest('.scheduler-card');
+      if (parentCard) parentCard.scrollLeft = 0;
+    }, 100);
+  }
+}
+
+function renderCalendarGrid() {
+  const monthSelect = document.getElementById('calMonthSelect');
+  const yearInput = document.getElementById('calYearInput');
+  const daysGrid = document.getElementById('calDaysGrid');
+  const toggleBadge = document.getElementById('calToggleBadge');
+  if (!daysGrid) return;
+
+  const isBn = currentLang === 'bn';
+  const data = calI18n[isBn ? 'bn' : 'en'];
+
+  if (monthSelect) monthSelect.value = calMonth;
+  if (yearInput) yearInput.value = calYear;
+  if (toggleBadge) {
+    toggleBadge.textContent = `${data.months[calMonth]} ${calYear}`;
+  }
+
+  daysGrid.innerHTML = '';
+
+  const firstDayIndex = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(calYear, calMonth, 0).getDate();
+
+  const now = new Date();
+  const isThisMonth = (now.getFullYear() === calYear && now.getMonth() === calMonth);
+
+  // 1. Trailing days from previous month
+  for (let i = firstDayIndex - 1; i >= 0; i--) {
+    const day = prevMonthDays - i;
+    const cell = document.createElement('div');
+    cell.className = 'cal-day other-month';
+    cell.textContent = day;
+    cell.addEventListener('click', () => {
+      if (calMonth === 0) {
+        calMonth = 11;
+        calYear = Math.max(2000, calYear - 1);
+      } else {
+        calMonth--;
+      }
+      setCalendarSelection(calYear, calMonth, day);
+      renderCalendarGrid();
+      renderDatePills();
+    });
+    daysGrid.appendChild(cell);
+  }
+
+  // 2. Current month days (1 to 28/29/30/31)
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+    cell.textContent = d;
+
+    if (isThisMonth && now.getDate() === d) {
+      cell.classList.add('today');
+    }
+
+    if (calYear === calSelectedYear && calMonth === calSelectedMonth && d === calSelectedDay) {
+      cell.classList.add('active');
+    }
+
+    cell.addEventListener('click', () => {
+      setCalendarSelection(calYear, calMonth, d);
+      renderCalendarGrid();
+      renderDatePills();
+
+      // Automatically close calendar window upon selecting a date
+      const dropWrap = document.getElementById('calDropdownWrap');
+      const toggleBtn = document.getElementById('calToggleBtn');
+      if (dropWrap && toggleBtn) {
+        dropWrap.classList.remove('open');
+        toggleBtn.classList.remove('open');
+      }
+    });
+
+    daysGrid.appendChild(cell);
+  }
+
+  // 3. Leading days for next month to complete 7-columns
+  const totalCells = firstDayIndex + daysInMonth;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let d = 1; d <= remaining; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-day other-month';
+    cell.textContent = d;
+    cell.addEventListener('click', () => {
+      if (calMonth === 11) {
+        calMonth = 0;
+        calYear = Math.min(5000, calYear + 1);
+      } else {
+        calMonth++;
+      }
+      setCalendarSelection(calYear, calMonth, d);
+      renderCalendarGrid();
+      renderDatePills();
+    });
+    daysGrid.appendChild(cell);
+  }
+
+  updateSelectedDateDisplay();
+}
+
+function setCalendarSelection(y, m, d) {
+  calSelectedYear = y;
+  calSelectedMonth = m;
+  calSelectedDay = d;
+  updateSelectedDateDisplay();
+}
+
+function updateSelectedDateDisplay() {
+  const isBn = currentLang === 'bn';
+  const data = calI18n[isBn ? 'bn' : 'en'];
+  const dateObj = new Date(calSelectedYear, calSelectedMonth, calSelectedDay);
+  const dayName = data.dayNames[dateObj.getDay()];
+  const monthName = data.months[calSelectedMonth];
+
+  selectedDateStr = `${calI18n.en.dayNames[dateObj.getDay()]}, ${calSelectedDay} ${calI18n.en.months[calSelectedMonth]} ${calSelectedYear}`;
+
+  const selectedText = document.getElementById('calSelectedDateText');
+  if (selectedText) {
+    selectedText.textContent = `${dayName}, ${calSelectedDay} ${monthName} ${calSelectedYear}`;
+  }
+}
+
+// Dropdown Window Toggle & Close Listeners
+const calToggleBtn = document.getElementById('calToggleBtn');
+const calDropdownWrap = document.getElementById('calDropdownWrap');
+const calCloseBtn = document.getElementById('calCloseBtn');
+
+if (calToggleBtn && calDropdownWrap) {
+  calToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = calDropdownWrap.classList.toggle('open');
+    calToggleBtn.classList.toggle('open', isOpen);
+  });
+}
+
+if (calCloseBtn && calDropdownWrap && calToggleBtn) {
+  calCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    calDropdownWrap.classList.remove('open');
+    calToggleBtn.classList.remove('open');
+  });
+}
+
+// Click outside to close calendar dropdown
+document.addEventListener('click', (e) => {
+  if (calDropdownWrap && calToggleBtn && calDropdownWrap.classList.contains('open')) {
+    if (!calDropdownWrap.contains(e.target) && !calToggleBtn.contains(e.target)) {
+      calDropdownWrap.classList.remove('open');
+      calToggleBtn.classList.remove('open');
+    }
+  }
+});
+
+// Navigation & Controls Listeners
+const prevMonthBtn = document.getElementById('calPrevMonth');
+if (prevMonthBtn) {
+  prevMonthBtn.addEventListener('click', () => {
+    if (calMonth === 0) {
+      calMonth = 11;
+      calYear = Math.max(2000, calYear - 1);
+    } else {
+      calMonth--;
+    }
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+const nextMonthBtn = document.getElementById('calNextMonth');
+if (nextMonthBtn) {
+  nextMonthBtn.addEventListener('click', () => {
+    if (calMonth === 11) {
+      calMonth = 0;
+      calYear = Math.min(5000, calYear + 1);
+    } else {
+      calMonth++;
+    }
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+const monthSelect = document.getElementById('calMonthSelect');
+if (monthSelect) {
+  monthSelect.addEventListener('change', (e) => {
+    calMonth = parseInt(e.target.value, 10);
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+const yearInput = document.getElementById('calYearInput');
+if (yearInput) {
+  yearInput.addEventListener('change', (e) => {
+    const val = parseInt(e.target.value, 10);
+    if (!isNaN(val) && val >= 2000 && val <= 5000) {
+      calYear = val;
+      renderCalendarGrid();
+      renderDatePills();
+    }
+  });
+}
+
+const prevYearBtn = document.getElementById('calPrevYear');
+if (prevYearBtn) {
+  prevYearBtn.addEventListener('click', () => {
+    calYear = Math.max(2000, calYear - 1);
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+const nextYearBtn = document.getElementById('calNextYear');
+if (nextYearBtn) {
+  nextYearBtn.addEventListener('click', () => {
+    calYear = Math.min(5000, calYear + 1);
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+const todayBtn = document.getElementById('calTodayBtn');
+if (todayBtn) {
+  todayBtn.addEventListener('click', () => {
+    const t = new Date();
+    calYear = t.getFullYear();
+    calMonth = t.getMonth();
+    setCalendarSelection(calYear, calMonth, t.getDate());
+    renderCalendarGrid();
+    renderDatePills();
+  });
+}
+
+window.addEventListener('langChanged', () => {
+  initCalendar();
+});
+
+// Duration Selection Handlers
+document.querySelectorAll('.duration-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.duration-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedDuration = parseInt(btn.getAttribute('data-duration'), 10);
+  });
+});
+
+// Platform Selection Handlers
+document.querySelectorAll('.platform-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedPlatform = btn.getAttribute('data-platform');
+  });
+});
+
+// Time Slot Selection Handlers
+document.querySelectorAll('.time-slot-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedTimeStr = btn.getAttribute('data-time');
+  });
+});
+
+// Close Meeting Modal
+function closeMeetingModal() {
+  const modal = document.getElementById('bookingSuccessModal');
+  if (modal) modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Meeting Form Submit Handler
+const meetingForm = document.getElementById('meetingBookingForm');
+if (meetingForm) {
+  meetingForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const clientName = document.getElementById('meetClientName').value.trim();
+    const clientEmail = document.getElementById('meetClientEmail').value.trim();
+    const clientPhone = document.getElementById('meetClientPhone').value.trim();
+    const topic = document.getElementById('meetTopic').value;
+
+    if (!clientName || !clientEmail || !clientPhone) {
+      showToast('Please fill all required fields.', 'warning');
+      return;
+    }
+
+    const submitBtn = meetingForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+    }
+
+    // Prepare Webhook Payload for Google Calendar
+    const bookingPayload = {
+      clientName: clientName,
+      clientEmail: clientEmail,
+      clientPhone: clientPhone,
+      topic: topic,
+      platform: selectedPlatform,
+      duration: selectedDuration,
+      timeStr: selectedTimeStr,
+      dateStr: selectedDateStr,
+      year: calSelectedYear,
+      month: calSelectedMonth,
+      day: calSelectedDay
+    };
+
+    // If Google Apps Script Webhook URL is set, send async POST
+    if (typeof GOOGLE_SCRIPT_WEBHOOK_URL !== 'undefined' && GOOGLE_SCRIPT_WEBHOOK_URL.trim() !== '') {
+      try {
+        await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(bookingPayload)
+        });
+      } catch (err) {
+        console.warn('Google Script Webhook notice:', err);
+      }
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
+
+    // Populate Modal Summary
+    document.getElementById('sumClientName').textContent = clientName;
+    document.getElementById('sumDateTime').textContent = `${selectedDateStr} at ${selectedTimeStr} (GMT+6)`;
+    document.getElementById('sumDuration').textContent = `${selectedDuration} Minutes`;
+    document.getElementById('sumPlatform').textContent = selectedPlatform;
+    document.getElementById('sumTopic').textContent = topic;
+
+    // Generate Google Calendar Event Link
+    const eventTitle = encodeURIComponent(`1-on-1 Consultation: ${clientName} & Faizul Islam Rifat`);
+    const eventDetails = encodeURIComponent(`Consultation Session\nTopic: ${topic}\nDuration: ${selectedDuration} min\nPlatform: ${selectedPlatform}\nClient: ${clientName} (${clientPhone}, ${clientEmail})`);
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&details=${eventDetails}&location=${encodeURIComponent(selectedPlatform)}`;
+    document.getElementById('btnGoogleCalendar').href = gCalUrl;
+
+    // Generate WhatsApp Notification Link
+    const waText = encodeURIComponent(
+      `👋 Hi Faizul Islam Rifat,\n\nI just scheduled a 1-on-1 Video Consultation on your website!\n\n` +
+      `📅 Date & Time: ${selectedDateStr} at ${selectedTimeStr} (GMT+6)\n` +
+      `⏱️ Duration: ${selectedDuration} Minutes\n` +
+      `💻 Platform: ${selectedPlatform}\n` +
+      `📌 Topic: ${topic}\n\n` +
+      `👤 Name: ${clientName}\n` +
+      `📧 Email: ${clientEmail}\n` +
+      `📱 Phone: ${clientPhone}\n\nPlease confirm our meeting link.`
+    );
+    document.getElementById('btnWhatsAppConfirm').href = `https://wa.me/8801834581975?text=${waText}`;
+
+    // Show Confirmed Modal
+    const modal = document.getElementById('bookingSuccessModal');
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    fireConfetti();
+    showToast(currentLang === 'bn' ? '🎉 মিটিং সফলভাবে বুক করা হয়েছে!' : '🎉 Consultation booked successfully!', 'success');
+  });
+}
+
+// Initialize on Load
+document.addEventListener('DOMContentLoaded', () => {
+  initCalendar();
+});
+
+// Form Submission handling
+document.getElementById('detailedContactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const successMsg = currentLang === 'bn'
+    ? window.pageTranslations.bn.toast_sent_success
+    : window.pageTranslations.en.toast_sent_success;
+  showToast(successMsg, 'success');
+  fireConfetti();
+  this.reset();
+});
+</script>
+</body>
+</html>

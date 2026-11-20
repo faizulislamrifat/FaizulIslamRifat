@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills & Technical Expertise — Faizul Islam Rifat</title>
+<meta name="description" content="Explore Faizul Islam Rifat's technical skills in video editing, digital marketing, WordPress development, and content strategy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* Skills Page Specific Styles */
+.skills-stat-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+.stat-pill {
+  padding: 24px;
+  text-align: center;
+}
+.stat-pill h3 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-pill p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.skills-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+.skill-box {
+  padding: 36px 30px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+}
+.skill-box-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-glass);
+}
+.skill-box-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+.skill-box-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.skill-box-header span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.skill-meter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+.meter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meter-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.meter-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.meter-title i { color: var(--accent); font-size: 0.85rem; }
+.meter-percent {
+  font-weight: 700;
+  color: var(--accent2);
+}
+.meter-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.meter-bar {
+  height: 9px;
+  background: var(--bg-glass);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+}
+.meter-fill {
+  height: 100%;
+  border-radius: 6px;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 1.6s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Tool Tech Stack Matrix */
+.stack-matrix-wrap {
+  margin-bottom: 80px;
+}
+.stack-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.stack-badge {
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.stack-badge i {
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+.stack-badge:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+/* Workflow Steps */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 80px;
+}
+.workflow-card {
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  transition: transform var(--transition);
+}
+.workflow-card:hover { transform: translateY(-6px); }
+.workflow-step-num {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--border-glass);
+  line-height: 1;
+}
+.workflow-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: rgba(124, 92, 252, 0.12);
+  border: 1px solid var(--border-glass-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin: 0 auto 20px;
+}
+.workflow-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.workflow-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .skills-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .skill-box {
+    padding: 24px 18px !important;
+  }
+  .stat-pill {
+    padding: 18px 14px !important;
+  }
+  .workflow-card {
+    padding: 24px 18px !important;
+  }
+  .stack-badge {
+    padding: 10px 18px !important;
+    font-size: 0.85rem !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mesh Background -->
+<div class="mesh-bg"><div class="orb"></div></div>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html" class="active">Skills</a></li>
+      <li><a href="github-projects.html">GitHub Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html" class="active">Skills & Stack</a>
+  <a href="github-projects.html">GitHub Projects</a>
+  <a href="contact.html">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<!-- Main Container -->
+<main class="container">
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="badge">
+      <i class="fas fa-tools"></i>
+      <span data-i18n="skills_hero_badge">Technical Directory & Competencies</span>
+    </div>
+    <h1 class="section-title" data-i18n="skills_hero_title">Mastery Across <span class="accent">Video, Code & Growth</span></h1>
+    <p class="section-subtitle" data-i18n="skills_hero_subtitle">A detailed breakdown of the technical skills, creative software, and data-driven marketing tools I bring to every client engagement.</p>
+    <div style="display:flex; justify-content:center; width:100%;">
+      <div class="breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-i18n="nav_skills">Skills</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Stat Bar -->
+  <section class="skills-stat-bar reveal">
+    <div class="stat-pill glass">
+      <h3>16+</h3>
+      <p data-i18n="sstat_tools">Production Tools Mastered</p>
+    </div>
+    <div class="stat-pill glass">
+      <h3>95%</h3>
+      <p data-i18n="sstat_top">Top Skill Proficiency</p>
+    </div>
+    <div class="stat-pill glass">
+      <h3>3+</h3>
+      <p data-i18n="sstat_exp">Years Practical Experience</p>
+    </div>
+    <div class="stat-pill glass">
+      <h3>100%</h3>
+      <p data-i18n="sstat_standard">Modern Industry Standards</p>
+    </div>
+  </section>
+
+  <!-- Detailed Skills Categories Grid -->
+  <section class="skills-detail-grid reveal">
+
+    <!-- 1. Marketing, Paid Ads & SEO -->
+    <div class="skill-box glass">
+      <div class="skill-box-header">
+        <div class="skill-box-icon"><i class="fas fa-bullhorn"></i></div>
+        <div>
+          <h3 data-i18n="skcat_mktg_title">Digital Marketing & SEO</h3>
+          <span data-i18n="skcat_mktg_sub">Paid Campaigns & Audience Reach</span>
+        </div>
+      </div>
+      <div class="skill-meter-group">
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fab fa-facebook-f"></i> Meta Ads (FB & Insta)</span>
+            <span class="meter-percent">90%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_fbads">Audience segmentation, Pixel/CAPI tracking, A/B creative testing, high ROAS.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="90"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fab fa-youtube"></i> YouTube SEO & Growth</span>
+            <span class="meter-percent">92%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_ytseo">High-volume keyword research, CTR thumbnail strategy, metadata ranking.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="92"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fas fa-chart-pie"></i> Google Analytics & CRO</span>
+            <span class="meter-percent">82%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_analytics">Conversion funnels, bounce reduction, visitor tracking, metrics analysis.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="82"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fas fa-envelope-open-text"></i> Email Marketing Funnels</span>
+            <span class="meter-percent">78%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_email">Automated drip sequences, newsletter design, lead nurturing strategies.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="78"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Web Development & CMS -->
+    <div class="skill-box glass">
+      <div class="skill-box-header">
+        <div class="skill-box-icon"><i class="fas fa-laptop-code"></i></div>
+        <div>
+          <h3 data-i18n="skcat_web_title">Web Solutions & E-Commerce</h3>
+          <span data-i18n="skcat_web_sub">Fast, Responsive & Conversion-Ready</span>
+        </div>
+      </div>
+      <div class="skill-meter-group">
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fab fa-wordpress"></i> WordPress & Elementor Pro</span>
+            <span class="meter-percent">94%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_wp">Pixel-perfect custom landing pages, dynamic content, mobile breakpoints.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="94"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fab fa-html5"></i> HTML5, CSS3 & Modern UI</span>
+            <span class="meter-percent">86%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_html">Glassmorphism aesthetics, CSS Grid/Flexbox, clean semantic code, custom styling.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="86"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fas fa-shopping-bag"></i> WooCommerce & Local Pay</span>
+            <span class="meter-percent">84%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_woo">Complete store setup, cart flows, bKash / Nagad payment gateway setup.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="84"></div></div>
+        </div>
+
+        <div class="meter-item">
+          <div class="meter-info">
+            <span class="meter-title"><i class="fas fa-tachometer-alt"></i> Speed & Core Web Vitals</span>
+            <span class="meter-percent">88%</span>
+          </div>
+          <p class="meter-desc" data-i18n="mdesc_speed">Asset minification, caching, image compression, 90+ Google PageSpeed score.</p>
+          <div class="meter-bar"><div class="meter-fill" data-width="88"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Tools & Tech Stack Matrix -->
+  <section class="stack-matrix-wrap reveal">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="stack_matrix_title">Tools & Software <span class="accent">Matrix</span></h2>
+      <p class="section-subtitle" data-i18n="stack_matrix_sub">The professional applications and platforms powering my day-to-day production.</p>
+    </div>
+    <div class="stack-badges">
+      <a href="projects.html?skill=premiere" class="stack-badge glass"><i class="fas fa-play"></i> Premiere Pro</a>
+      <a href="projects.html?skill=aftereffects" class="stack-badge glass"><i class="fas fa-layer-group"></i> After Effects</a>
+      <a href="projects.html?skill=davinci" class="stack-badge glass"><i class="fas fa-sliders-h"></i> DaVinci Resolve</a>
+      <a href="projects.html?skill=wordpress" class="stack-badge glass"><i class="fab fa-wordpress-simple"></i> WordPress</a>
+      <a href="projects.html?skill=elementor" class="stack-badge glass"><i class="fas fa-cube"></i> Elementor Pro</a>
+      <a href="projects.html?skill=html" class="stack-badge glass"><i class="fab fa-html5"></i> HTML5 / CSS3</a>
+      <a href="projects.html?skill=javascript" class="stack-badge glass"><i class="fab fa-js-square"></i> JavaScript</a>
+      <a href="projects.html?skill=ads" class="stack-badge glass"><i class="fab fa-facebook"></i> Meta Ads</a>
+      <a href="projects.html?skill=youtube" class="stack-badge glass"><i class="fab fa-youtube"></i> YouTube Studio</a>
+      <a href="projects.html?skill=seo" class="stack-badge glass"><i class="fas fa-search"></i> VidIQ / TubeBuddy</a>
+      <a href="projects.html?skill=figma" class="stack-badge glass"><i class="fab fa-figma"></i> Figma</a>
+      <a href="projects.html?skill=photoshop" class="stack-badge glass"><i class="fas fa-paint-brush"></i> Photoshop</a>
+      <a href="projects.html?skill=woocommerce" class="stack-badge glass"><i class="fas fa-shopping-cart"></i> WooCommerce</a>
+      <a href="projects.html?skill=analytics" class="stack-badge glass"><i class="fas fa-chart-line"></i> Google Analytics</a>
+    </div>
+  </section>
+
+  <!-- 4-Step Workflow -->
+  <section class="section reveal">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="workflow_title">My 4-Step <span class="accent">Execution Process</span></h2>
+      <p class="section-subtitle" data-i18n="workflow_subtitle">How I convert your requirements into high-performing creative and digital solutions.</p>
+    </div>
+    <div class="workflow-grid">
+      <div class="workflow-card glass">
+        <span class="workflow-step-num">01</span>
+        <div class="workflow-icon"><i class="fas fa-search"></i></div>
+        <h3 data-i18n="wf1_title">Discovery & Strategy</h3>
+        <p data-i18n="wf1_desc">Audience research, competitor auditing, and defining clear KPIs before touching any software.</p>
+      </div>
+      <div class="workflow-card glass">
+        <span class="workflow-step-num">02</span>
+        <div class="workflow-icon"><i class="fas fa-pencil-ruler"></i></div>
+        <h3 data-i18n="wf2_title">Script & Wireframe</h3>
+        <p data-i18n="wf2_desc">Crafting hooks, storyboards, copy layouts, and prototype wireframes for structured execution.</p>
+      </div>
+      <div class="workflow-card glass">
+        <span class="workflow-step-num">03</span>
+        <div class="workflow-icon"><i class="fas fa-code"></i></div>
+        <h3 data-i18n="wf3_title">Production & Code</h3>
+        <p data-i18n="wf3_desc">Cinematic editing, sound design, responsive coding, and seamless payment integration.</p>
+      </div>
+      <div class="workflow-card glass">
+        <span class="workflow-step-num">04</span>
+        <div class="workflow-icon"><i class="fas fa-rocket"></i></div>
+        <h3 data-i18n="wf4_title">Launch & Optimize</h3>
+        <p data-i18n="wf4_desc">PageSpeed verification, ad conversion tracking, analytics monitoring, and continuous scaling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner reveal">
+    <div class="badge" style="margin-bottom:12px;" data-i18n="cta_badge">Ready to Start?</div>
+    <h2 data-i18n="skills_cta_title">Put These Skills to Work for Your Business</h2>
+    <p data-i18n="skills_cta_desc">Whether you need a high-converting website, viral video edits, or profitable ad funnels, I am ready to deliver.</p>
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-primary" data-i18n="cta_btn">Let's Talk Now</a>
+      <a href="projects.html" class="btn btn-outline" data-i18n="nav_projects">See My Work In Action</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="shared.js"></script>
+<script>
+// Translations for Skills Page
+window.pageTranslations = {
+  en: {
+    skills_hero_badge: "Technical Directory & Competencies",
+    skills_hero_title: 'Mastery Across <span class="accent">Video, Code & Growth</span>',
+    skills_hero_subtitle: "A detailed breakdown of the technical skills, creative software, and data-driven marketing tools I bring to every client engagement.",
+    sstat_tools: "Production Tools Mastered",
+    sstat_top: "Top Skill Proficiency",
+    sstat_exp: "Years Practical Experience",
+    sstat_standard: "Modern Industry Standards",
+    skcat_mktg_title: "Digital Marketing & SEO",
+    skcat_mktg_sub: "Paid Campaigns & Audience Reach",
+    mdesc_fbads: "Audience segmentation, Pixel/CAPI tracking, A/B creative testing, high ROAS.",
+    mdesc_ytseo: "High-volume keyword research, CTR thumbnail strategy, metadata ranking.",
+    mdesc_analytics: "Conversion funnels, bounce reduction, visitor tracking, metrics analysis.",
+    mdesc_email: "Automated drip sequences, newsletter design, lead nurturing strategies.",
+    skcat_web_title: "Web Solutions & E-Commerce",
+    skcat_web_sub: "Fast, Responsive & Conversion-Ready",
+    mdesc_wp: "Pixel-perfect custom landing pages, dynamic content, mobile breakpoints.",
+    mdesc_html: "Glassmorphism aesthetics, CSS Grid/Flexbox, clean semantic code, custom styling.",
+    mdesc_woo: "Complete store setup, cart flows, bKash / Nagad payment gateway setup.",
+    mdesc_speed: "Asset minification, caching, image compression, 90+ Google PageSpeed score.",
+    stack_matrix_title: 'Tools & Software <span class="accent">Matrix</span>',
+    stack_matrix_sub: "The professional applications and platforms powering my day-to-day production.",
+    workflow_title: 'My 4-Step <span class="accent">Execution Process</span>',
+    workflow_subtitle: "How I convert your requirements into high-performing creative and digital solutions.",
+    wf1_title: "Discovery & Strategy",
+    wf1_desc: "Audience research, competitor auditing, and defining clear KPIs before touching any software.",
+    wf2_title: "Script & Wireframe",
+    wf2_desc: "Crafting hooks, storyboards, copy layouts, and prototype wireframes for structured execution.",
+    wf3_title: "Production & Code",
+    wf3_desc: "Cinematic editing, sound design, responsive coding, and seamless payment integration.",
+    wf4_title: "Launch & Optimize",
+    wf4_desc: "PageSpeed verification, ad conversion tracking, analytics monitoring, and continuous scaling.",
+    skills_cta_title: "Put These Skills to Work for Your Business",
+    skills_cta_desc: "Whether you need a high-converting website, viral video edits, or profitable ad funnels, I am ready to deliver."
+  },
+  };
+</script>
+</body>
+</html>

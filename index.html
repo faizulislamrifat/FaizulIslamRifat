@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faizul Islam Rifat — Growth Strategist & Video Producer</title>
+<meta name="description" content="Official portfolio of Faizul Islam Rifat — Helping creators, brands, and businesses scale through high-retention video production, performance ads, and conversion web architecture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ============================================================
+   KHALID FARHAN STYLE HEADER & FOOTER + TANMOY DUTTA BODY
+   ============================================================ */
+
+/* Header and Footer styles handled by shared.css */
+
+/* Tanmoy Dutta Style Hero Section */
+.td-hero {
+  padding: 70px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.td-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+.td-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(124, 92, 252, 0.12);
+  border: 1px solid var(--border-glass-glow);
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.td-hero h1 {
+  font-family: 'Outfit', var(--font-main);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+.td-hero-p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 580px;
+}
+.td-hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.td-primary-btn {
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 24px var(--accent-glow);
+  transition: all var(--transition);
+}
+.td-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px var(--accent-glow);
+}
+.td-secondary-btn {
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+}
+.td-secondary-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-glass-hover);
+  transform: translateY(-2px);
+}
+
+/* Tanmoy Dutta Visual Showcase Card */
+.td-portrait-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.td-portrait-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 490px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--border-glass-glow);
+  box-shadow: var(--shadow-hover), 0 0 40px var(--accent-glow);
+}
+.td-portrait-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.td-portrait-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 26, 0.9) 0%, rgba(10, 10, 26, 0.2) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+/* Floating Proof Badges around Portrait */
+.td-float-badge {
+  position: absolute;
+  background: rgba(10, 10, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass-glow);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  animation: floatAnim 6s ease-in-out infinite;
+}
+
+.td-float-badge.badge-top-left {
+  top: 24px;
+  left: -24px;
+  animation-delay: 0s;
+}
+.td-float-badge.badge-bottom-right {
+  bottom: 30px;
+  right: -24px;
+  animation-delay: -3s;
+}
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.td-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Tanmoy Dutta Authority / Metrics Strip */
+.td-metrics-strip {
+  margin: 50px 0 70px;
+  padding: 32px 40px;
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+}
+.td-metric-item h3 {
+  font-family: 'Outfit', var(--font-main);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.td-metric-item p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Brands & Client Showcase Ticker */
+.td-brands-section {
+  text-align: center;
+  margin-bottom: 90px;
+}
+.td-brands-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.td-brands-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.td-brand-chip {
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+}
+.td-brand-chip:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* 3-Pillar Growth Framework Cards */
+.td-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 90px;
+}
+.td-service-card {
+  padding: 36px 30px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.td-service-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-glass-glow);
+  box-shadow: var(--shadow-hover);
+}
+.td-service-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 22px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+}
+.td-service-card h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.td-service-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+.td-service-features {
+  list-style: none;
+  border-top: 1px solid var(--border-glass);
+  padding-top: 18px;
+  margin-bottom: 24px;
+}
+.td-service-features li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.td-service-features li i {
+  color: var(--accent2);
+  font-size: 0.8rem;
+}
+
+/* Embedded Meeting Scheduler Styling */
+.td-scheduler-container {
+  margin-bottom: 90px;
+}
+
+
+
+@media (max-width: 992px) {
+  .td-hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .td-hero-p { margin-left: auto; margin-right: auto; }
+  .td-hero-actions { justify-content: center; }
+  .td-metrics-strip { grid-template-columns: 1fr 1fr; gap: 20px; padding: 24px; }
+  .td-services-grid { grid-template-columns: 1fr; }
+  .td-float-badge.badge-top-left { left: 4px; }
+  .td-float-badge.badge-bottom-right { right: 4px; }
+}
+
+@media (max-width: 640px) {
+  .td-metrics-strip { grid-template-columns: 1fr; }
+  .td-portrait-card { height: 380px; max-width: 330px; margin: 0 auto; }
+  .td-float-badge { padding: 8px 12px; font-size: 0.78rem; gap: 8px; }
+  .td-float-badge .td-badge-icon { width: 32px; height: 32px; font-size: 1rem; }
+  .td-float-badge.badge-top-left { top: 12px; left: -8px; }
+  .td-float-badge.badge-bottom-right { bottom: 16px; right: -8px; }
+  .td-primary-btn, .td-secondary-btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient Mesh Gradient -->
+<div class="mesh-bg"><div class="orb"></div></div>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="github-projects.html">GitHub Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html" class="active">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html">Skills & Stack</a>
+  <a href="github-projects.html">GitHub Projects</a>
+  <a href="contact.html">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<main class="container">
+
+  <!-- ============================================================
+       TANMOY DUTTA STYLE HERO SECTION
+       ============================================================ -->
+  <section class="td-hero">
+    <div class="td-hero-grid">
+      
+      <!-- Left Content -->
+      <div>
+        <div class="td-badge">
+          <i class="fas fa-rocket"></i>
+          <span data-i18n="td_hero_badge">AI-Powered Video & Growth Consulting • 2026</span>
+        </div>
+
+        <h1 data-i18n="td_hero_title">
+          Scale Your Business With <span class="accent">High-Converting Video</span> & Growth Strategy
+        </h1>
+
+        <p class="td-hero-p" data-i18n="td_hero_desc">
+          I help modern brands, creators, and entrepreneurs drive exponential reach, lower acquisition costs, and maximize revenue through cinematic video production, performance ad funnels, and conversion-optimized web platforms.
+        </p>
+
+        <div class="td-hero-actions">
+          <a href="contact.html#scheduler" class="td-primary-btn" data-i18n="td_btn_consult">
+            <i class="fas fa-calendar-check"></i>
+            <span>Schedule 1-on-1 Call</span>
+          </a>
+          <a href="#caseStudies" class="td-secondary-btn" data-i18n="td_btn_studies">
+            <i class="fas fa-chart-line"></i>
+            <span>Explore Case Studies</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Visual Portrait with Floating Proof Badges -->
+      <div class="td-portrait-wrapper">
+        
+        <!-- Floating Badge: Client Rating -->
+        <div class="td-float-badge badge-top-left">
+          <div class="td-badge-icon" style="background:rgba(245, 158, 11, 0.15); color:#f59e0b;">
+            <i class="fas fa-star"></i>
+          </div>
+          <div>
+            <div style="font-size:0.85rem; font-weight:800; color:var(--text-primary);">5.0 Star Rating</div>
+            <div style="font-size:0.75rem; color:var(--text-secondary);">50+ Satisfied Clients</div>
+          </div>
+        </div>
+
+        <!-- Floating Badge: ROAS Metric -->
+        <div class="td-float-badge badge-bottom-right">
+          <div class="td-badge-icon" style="background:rgba(34, 197, 94, 0.15); color:#22c55e;">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <div>
+            <div style="font-size:0.85rem; font-weight:800; color:#22c55e;">5X Average ROAS</div>
+            <div style="font-size:0.75rem; color:var(--text-secondary);">Paid Meta & YouTube Ads</div>
+          </div>
+        </div>
+
+        <!-- Main Photo Card -->
+        <div class="td-portrait-card">
+          <img src="rifat-photo.jpg" alt="Faizul Islam Rifat">
+          <div class="td-portrait-overlay">
+            <h3 style="font-size:1.25rem; font-weight:800; color:#fff;">Faizul Islam Rifat</h3>
+            <p style="font-size:0.85rem; color:var(--accent2); font-weight:600;">Creative Director & Performance Marketer</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================
+         AUTHORITY METRICS STRIP (Tanmoy Dutta Style)
+         ============================================================ -->
+    <div class="td-metrics-strip reveal">
+      <div class="td-metric-item">
+        <h3 data-count="50">50+</h3>
+        <p data-i18n="m_projects">Completed Projects</p>
+      </div>
+      <div class="td-metric-item">
+        <h3>5X</h3>
+        <p data-i18n="m_roas">Average Client ROAS</p>
+      </div>
+      <div class="td-metric-item">
+        <h3>100K+</h3>
+        <p data-i18n="m_reach">Audience & Views Generated</p>
+      </div>
+      <div class="td-metric-item">
+        <h3>98%</h3>
+        <p data-i18n="m_satisfaction">Client Retention & Rating</p>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         CLIENT BRANDS TICKER
+         ============================================================ -->
+    <div class="td-brands-section reveal">
+      <div class="td-brands-label" data-i18n="td_brands_title">Featured Across Modern Brand Campaigns & Case Studies</div>
+      <div class="td-brands-grid">
+        <span class="td-brand-chip"><i class="fas fa-tshirt"></i> StyleHub Fashion</span>
+        <span class="td-brand-chip"><i class="fas fa-graduation-cap"></i> EduLearn Academy</span>
+        <span class="td-brand-chip"><i class="fas fa-play"></i> TechBD YouTube</span>
+        <span class="td-brand-chip"><i class="fas fa-dumbbell"></i> FitLife Health</span>
+        <span class="td-brand-chip"><i class="fas fa-shopping-basket"></i> GreenMart D2C</span>
+        <span class="td-brand-chip"><i class="fas fa-gem"></i> Lumina Aesthetics</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       3-PILLAR GROWTH FRAMEWORK (Tanmoy Dutta Style)
+       ============================================================ -->
+  <section class="section reveal" id="services">
+    <div style="text-align:center; max-width:700px; margin:0 auto 50px;">
+      <div class="badge" style="margin-bottom:12px;">
+        <i class="fas fa-cubes"></i>
+        <span data-i18n="fw_badge">Core Offerings & Framework</span>
+      </div>
+      <h2 class="section-title" data-i18n="fw_title">How I Help You <span class="accent">Grow & Scale</span></h2>
+      <p class="section-subtitle" data-i18n="fw_subtitle">A complete end-to-end ecosystem engineered to turn cold attention into loyal brand advocates and revenue.</p>
+    </div>
+
+    <div class="td-services-grid">
+      
+      <!-- Card 1: Video Production -->
+      <div class="td-service-card glass">
+        <div class="td-service-icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <h3 data-i18n="s1_title">Cinematic Video & Short-Form Pacing</h3>
+        <p data-i18n="s1_desc">
+          Retention-engineered editing for Reels, TikToks, and YouTube. Mastered in Premiere Pro and DaVinci Resolve with psychological hooks, custom SFX, and kinetic typography.
+        </p>
+        <ul class="td-service-features">
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s1_f1">Hook Design & 85%+ Audience Retention</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s1_f2">DaVinci Studio Color Grading & Sound FX</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s1_f3">High-Converting Social Media Promos</span></li>
+        </ul>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;" data-i18n="btn_book_s1">
+          Book Video Session ↗
+        </a>
+      </div>
+
+      <!-- Card 2: Performance Marketing -->
+      <div class="td-service-card glass">
+        <div class="td-service-icon" style="background:linear-gradient(135deg, var(--accent2), var(--accent3));">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3 data-i18n="s2_title">Paid Performance & Funnel Ads</h3>
+        <p data-i18n="s2_desc">
+          Profitable Meta & Google ad management built on precision tracking, aggressive A/B creative testing, and retargeting funnels that reduce cost-per-lead and multiply ROAS.
+        </p>
+        <ul class="td-service-features">
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s2_f1">3-Tier Meta Pixel Funnel Architecture</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s2_f2">Cost-Per-Lead (CPL) Diagnostic Reduction</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s2_f3">High-ROAS E-Commerce Sales Campaigns</span></li>
+        </ul>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;" data-i18n="btn_book_s2">
+          Book Marketing Audit ↗
+        </a>
+      </div>
+
+      <!-- Card 3: Web Architecture -->
+      <div class="td-service-card glass">
+        <div class="td-service-icon" style="background:linear-gradient(135deg, var(--accent3), var(--accent));">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3 data-i18n="s3_title">High-Converting Web Architecture</h3>
+        <p data-i18n="s3_desc">
+          Blazing-fast responsive landing pages and WooCommerce digital storefronts designed for maximum conversion, 90+ PageSpeed scores, and local payment gateways.
+        </p>
+        <ul class="td-service-features">
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s3_f1">Modern Glassmorphic Responsive Design</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s3_f2">bKash, Nagad & Stripe Checkout Gateways</span></li>
+          <li><i class="fas fa-check-circle"></i> <span data-i18n="s3_f3">Mobile Speed & Conversion Optimization</span></li>
+        </ul>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;" data-i18n="btn_book_s3">
+          Book Web Consultation ↗
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CASE STUDIES & PROVEN RESULTS (Tanmoy Dutta Style)
+       ============================================================ -->
+  <section class="section reveal" id="caseStudies">
+    <div style="text-align:center; max-width:700px; margin:0 auto 45px;">
+      <div class="badge" style="margin-bottom:12px;">
+        <i class="fas fa-award"></i>
+        <span data-i18n="cs_badge">Real Client Results</span>
+      </div>
+      <h2 class="section-title" data-i18n="cs_title">Featured <span class="accent">Case Studies</span></h2>
+      <p class="section-subtitle" data-i18n="cs_subtitle">Explore real-world client campaigns where creative execution met measurable business growth.</p>
+    </div>
+
+    <div class="case-studies-grid">
+      
+      <!-- Case 1: GreenMart -->
+      <div class="case-card glass">
+        <div class="case-banner">
+          <img src="project-greenmart.jpg" alt="GreenMart E-Commerce Store" style="width:100%; height:100%; object-fit:cover;">
+          <span class="case-badge-floating">Web Development</span>
+          <span class="case-metrics-badge"><i class="fas fa-rocket"></i> 92 PageSpeed Score</span>
+        </div>
+        <div class="case-body" style="padding:24px;">
+          <h3 class="case-title" style="font-size:1.25rem; font-weight:700; margin-bottom:8px;">E-Commerce Store — GreenMart</h3>
+          <p class="case-snippet" style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin-bottom:18px;">
+            Full-featured organic food store with one-click bKash/Nagad checkout, mobile speed optimization, and inventory automation.
+          </p>
+          <a href="projects.html" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;">View Full Case Study</a>
+        </div>
+      </div>
+
+      <!-- Case 2: EduLearn -->
+      <div class="case-card glass">
+        <div class="case-banner">
+          <img src="project-edulearn.jpg" alt="EduLearn Paid Ads" style="width:100%; height:100%; object-fit:cover;">
+          <span class="case-badge-floating">Performance Ads</span>
+          <span class="case-metrics-badge"><i class="fas fa-piggy-bank"></i> -70% Lead Cost</span>
+        </div>
+        <div class="case-body" style="padding:24px;">
+          <h3 class="case-title" style="font-size:1.25rem; font-weight:700; margin-bottom:8px;">EduLearn Lead Generation</h3>
+          <p class="case-snippet" style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin-bottom:18px;">
+            Structured 3-tier Meta advertising campaign that reduced cost-per-lead from ৳150 down to ৳45 while acquiring over 2,500 qualified course registrants.
+          </p>
+          <a href="projects.html" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;">View Full Case Study</a>
+        </div>
+      </div>
+
+      <!-- Case 3: TechBD -->
+      <div class="case-card glass">
+        <div class="case-banner">
+          <img src="project-techbd.jpg" alt="TechBD YouTube Growth" style="width:100%; height:100%; object-fit:cover;">
+          <span class="case-badge-floating">YouTube Channel</span>
+          <span class="case-metrics-badge"><i class="fas fa-chart-line"></i> 11.4% CTR Surge</span>
+        </div>
+        <div class="case-body" style="padding:24px;">
+          <h3 class="case-title" style="font-size:1.25rem; font-weight:700; margin-bottom:8px;">TechBD Channel Scaling</h3>
+          <p class="case-snippet" style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin-bottom:18px;">
+            Channel overhaul including retention-focused editing, high-contrast thumbnail compositing, and keyword metadata that scaled subscribers 10x.
+          </p>
+          <a href="projects.html" class="btn btn-outline btn-sm" style="width:100%; justify-content:center;">View Full Case Study</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EMBEDDED LIVE CONSULTATION SCHEDULER (Tanmoy Dutta Action)
+       ============================================================ -->
+  <section class="td-scheduler-container reveal" id="scheduler">
+    <div class="scheduler-card glass" style="padding:40px; border-radius:var(--radius-lg); border:1px solid var(--border-glass-glow); overflow:clip;">
+      
+      <div style="text-align:center; max-width:650px; margin:0 auto 36px;">
+        <div class="badge" style="margin-bottom:12px;">
+          <i class="fas fa-calendar-check"></i>
+          <span data-i18n="sched_badge">Live 1-on-1 Consultation</span>
+        </div>
+        <h2 class="section-title" data-i18n="sched_title">Schedule a Direct <span class="accent">Video Strategy Session</span></h2>
+        <p class="section-subtitle" style="margin-bottom:0;" data-i18n="sched_subtitle">
+          Pick your preferred session length, date, and time slot to lock in a private strategy session via Google Meet or Zoom.
+        </p>
+      </div>
+
+      <div class="sched-grid">
+        
+        <!-- Left Panel: Host Profile & Session Length -->
+        <div style="display:flex; flex-direction:column; gap:20px; min-width:0;">
+          <div style="display:flex; align-items:center; gap:16px; padding:18px; border-radius:var(--radius); background:var(--bg-glass); border:1px solid var(--border-glass);">
+            <img src="rifat-suit.jpg" alt="Faizul Islam Rifat" style="width:62px; height:62px; border-radius:50%; object-fit:cover; border:2px solid var(--accent); box-shadow:0 0 16px var(--accent-glow);">
+            <div>
+              <h4 style="font-size:1.05rem; font-weight:700;">Faizul Islam Rifat</h4>
+              <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:4px;">Video & Digital Growth Specialist</p>
+              <span style="font-size:0.75rem; color:#22c55e; font-weight:600;"><i class="fas fa-circle" style="font-size:0.55rem;"></i> Open for Bookings</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.92rem; font-weight:700; margin-bottom:12px;"><i class="fas fa-clock" style="color:var(--accent);"></i> 1. Choose Session Length</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <button type="button" class="duration-btn active" data-duration="30" onclick="setSessionDuration(30, this)" style="padding:16px; border-radius:var(--radius); background:rgba(124,92,252,0.18); border:1px solid var(--accent); color:var(--text-primary); cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-main);">
+                <div style="text-align:left;">
+                  <div style="font-size:0.95rem; font-weight:700;">⚡ 30 Min Discovery Call</div>
+                  <div style="font-size:0.8rem; color:var(--text-secondary);">Project scope, feasibility & roadmap</div>
+                </div>
+                <span style="font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:20px; background:var(--accent); color:#fff;">Intro</span>
+              </button>
+
+              <button type="button" class="duration-btn" data-duration="60" onclick="setSessionDuration(60, this)" style="padding:16px; border-radius:var(--radius); background:var(--bg-glass); border:1px solid var(--border-glass); color:var(--text-primary); cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-family:var(--font-main);">
+                <div style="text-align:left;">
+                  <div style="font-size:0.95rem; font-weight:700;">🎯 60 Min Deep-Dive Session</div>
+                  <div style="font-size:0.8rem; color:var(--text-secondary);">Full audit, funnel & video pacing</div>
+                </div>
+                <span style="font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:20px; background:var(--accent2); color:#000;">Deep Dive</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.92rem; font-weight:700; margin-bottom:12px;"><i class="fas fa-desktop" style="color:var(--accent);"></i> Meeting Platform</div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;">
+              <button type="button" class="platform-btn active" data-platform="Google Meet" onclick="setMeetingPlatform('Google Meet', this)" style="padding:12px 8px; border-radius:var(--radius-sm); background:rgba(0,229,255,0.15); border:1px solid var(--accent2); color:#fff; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px; font-family:var(--font-main);">
+                <i class="fab fa-google" style="color:#ea4335; font-size:1.2rem;"></i>
+                <span style="font-size:0.8rem; font-weight:600;">Google Meet</span>
+              </button>
+              <button type="button" class="platform-btn" data-platform="Zoom" onclick="setMeetingPlatform('Zoom', this)" style="padding:12px 8px; border-radius:var(--radius-sm); background:var(--bg-glass); border:1px solid var(--border-glass); color:var(--text-secondary); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px; font-family:var(--font-main);">
+                <i class="fas fa-video" style="color:#2d8cff; font-size:1.2rem;"></i>
+                <span style="font-size:0.8rem; font-weight:600;">Zoom</span>
+              </button>
+              <button type="button" class="platform-btn" data-platform="WhatsApp Call" onclick="setMeetingPlatform('WhatsApp Call', this)" style="padding:12px 8px; border-radius:var(--radius-sm); background:var(--bg-glass); border:1px solid var(--border-glass); color:var(--text-secondary); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px; font-family:var(--font-main);">
+                <i class="fab fa-whatsapp" style="color:#25d366; font-size:1.2rem;"></i>
+                <span style="font-size:0.8rem; font-weight:600;">WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Date, Time & Form -->
+        <div style="display:flex; flex-direction:column; gap:22px; min-width:0; width:100%; max-width:100%; box-sizing:border-box;">
+          <!-- Step 2: Interactive Date Picker with Dropdown Calendar -->
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span style="font-size:0.92rem; font-weight:700;"><i class="fas fa-calendar-alt" style="color:var(--accent);"></i> 2. Select Date</span>
+              <!-- Toggle Button for Full Calendar -->
+              <button type="button" class="cal-dropdown-trigger" id="homeToggleBtn" title="Click to open full calendar (12 months & years 2000-5000)">
+                <i class="fas fa-calendar-alt" style="color:var(--accent2);"></i>
+                <span id="homeToggleBadge">November 2026</span>
+                <i class="fas fa-chevron-down cal-trigger-chevron" id="homeTriggerChevron"></i>
+              </button>
+            </div>
+
+            <!-- Full Calendar Window (Tucked inside, opens on button click) -->
+            <div class="sched-calendar-wrap" id="homeDropdownWrap">
+              <div class="cal-nav-bar">
+                <div class="cal-controls-left">
+                  <button type="button" class="cal-nav-btn" id="homePrevMonth" title="Previous Month">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <select class="cal-month-select" id="homeMonthSelect" aria-label="Select Month">
+                    <!-- Populated dynamically (12 months) -->
+                  </select>
+                  <div class="cal-year-stepper">
+                    <button type="button" class="cal-year-btn" id="homePrevYear" title="Previous Year">
+                      <i class="fas fa-minus" style="font-size:0.65rem;"></i>
+                    </button>
+                    <input type="number" class="cal-year-input" id="homeYearInput" min="2000" max="5000" value="2026" title="Enter Year (2000 - 5000)">
+                    <button type="button" class="cal-year-btn" id="homeNextYear" title="Next Year">
+                      <i class="fas fa-plus" style="font-size:0.65rem;"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="cal-nav-btn" id="homeNextMonth" title="Next Month">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+
+                <div class="cal-controls-right">
+                  <button type="button" class="cal-today-btn" id="homeTodayBtn">
+                    <i class="fas fa-history"></i> <span>Today</span>
+                  </button>
+                  <button type="button" class="cal-close-btn" id="homeCloseBtn" title="Close Calendar">✕</button>
+                </div>
+              </div>
+
+              <div class="cal-weekdays" id="homeWeekdaysHeader"></div>
+              <div class="cal-grid" id="homeDaysGrid"></div>
+
+              <div class="cal-selected-status">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <i class="fas fa-check-circle" style="color:var(--accent2);"></i>
+                  <span>Selected Date:</span>
+                </div>
+                <strong id="homeSelectedDateText">Saturday, 21 November 2026</strong>
+              </div>
+            </div>
+
+            <!-- Horizontal Quick Date Pills (Always accessible) -->
+            <div class="date-scroll-wrap" id="homeDateScrollWrap" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:8px; width:100%; max-width:100%; box-sizing:border-box;"></div>
+          </div>
+
+          <div>
+            <div style="font-size:0.92rem; font-weight:700; margin-bottom:12px;"><i class="fas fa-hourglass-half" style="color:var(--accent);"></i> 3. Select Time Slot</div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:10px;" id="homeTimeSlots">
+              <button type="button" class="time-slot-btn active" data-time="11:00 AM" onclick="setHomeSlot('11:00 AM', this)">11:00 AM</button>
+              <button type="button" class="time-slot-btn" data-time="03:00 PM" onclick="setHomeSlot('03:00 PM', this)">03:00 PM</button>
+              <button type="button" class="time-slot-btn" data-time="05:30 PM" onclick="setHomeSlot('05:30 PM', this)">05:30 PM</button>
+              <button type="button" class="time-slot-btn" data-time="08:00 PM" onclick="setHomeSlot('08:00 PM', this)">08:00 PM</button>
+              <button type="button" class="time-slot-btn" data-time="09:30 PM" onclick="setHomeSlot('09:30 PM', this)">09:30 PM</button>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">
+              <i class="fas fa-globe-asia"></i> Times shown in Dhaka Time (GMT+6)
+            </div>
+          </div>
+
+          <!-- Quick Form -->
+          <form id="homeSchedulerForm" onsubmit="handleHomeBooking(event)" style="margin-top:6px; width:100%; box-sizing:border-box;">
+            <div style="font-size:0.92rem; font-weight:700; margin-bottom:12px;"><i class="fas fa-user-check" style="color:var(--accent);"></i> 4. Your Contact Details</div>
+            <div class="form-grid-2">
+              <div class="form-field" style="margin-bottom:0; min-width:0;">
+                <label data-i18n="lbl_name">Your Name *</label>
+                <input type="text" id="homeBookName" placeholder="John Doe" required>
+              </div>
+              <div class="form-field" style="margin-bottom:0; min-width:0;">
+                <label data-i18n="lbl_email">Email Address *</label>
+                <input type="email" id="homeBookEmail" placeholder="john@example.com" required>
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-field" style="margin-bottom:0; min-width:0;">
+                <label data-i18n="lbl_phone">WhatsApp Number *</label>
+                <input type="text" id="homeBookPhone" placeholder="+880 1XXX-XXXXXX" required>
+              </div>
+              <div class="form-field" style="margin-bottom:0; min-width:0;">
+                <label data-i18n="lbl_topic">Meeting Topic *</label>
+                <select id="homeBookTopic" required>
+                  <option value="Meta & Google Performance Ads" selected>Meta & Google Performance Ads</option>
+                  <option value="YouTube Growth & Channel Strategy">YouTube Growth & Channel Strategy</option>
+                  <option value="High-Converting Web Development">High-Converting Web Development</option>
+                  <option value="Full Digital Growth Strategy">Full Digital Growth Strategy</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="td-primary-btn" style="width:100%; justify-content:center; border:none; cursor:pointer;">
+              <i class="fas fa-calendar-check"></i>
+              <span>Confirm & Lock In Consultation</span>
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLIENT TESTIMONIALS (Social Proof)
+       ============================================================ -->
+  <section class="section reveal">
+    <div style="text-align:center; max-width:700px; margin:0 auto 50px;">
+      <div class="badge" style="margin-bottom:12px;">
+        <i class="fas fa-heart"></i>
+        <span data-i18n="t_badge">Client Feedback</span>
+      </div>
+      <h2 class="section-title" data-i18n="t_title">What Founders & <span class="accent">Creators Say</span></h2>
+      <p class="section-subtitle" data-i18n="t_subtitle">Feedback from startups, businesses, and content creators scaled with my work.</p>
+    </div>
+
+    <div class="testimonials-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px;">
+      
+      <div class="testimonial-card glass" style="padding:32px; border-radius:var(--radius-lg);">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff;">AJ</div>
+          <div>
+            <h4 style="font-size:1.05rem; font-weight:700;">Alex Johnson</h4>
+            <p style="font-size:0.82rem; color:var(--text-secondary);">Founder, StyleHub Streetwear</p>
+          </div>
+        </div>
+        <div style="color:#f59e0b; margin-bottom:14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.7;">
+          "Rifat transformed our ad creatives completely. His video pacing and color grading drove over 50,000 views within a single week. Highly recommend him for any brand looking to scale."
+        </p>
+      </div>
+
+      <div class="testimonial-card glass" style="padding:32px; border-radius:var(--radius-lg);">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent2); display:flex; align-items:center; justify-content:center; font-weight:800; color:#0a0a1a;">SW</div>
+          <div>
+            <h4 style="font-size:1.05rem; font-weight:700;">Sarah Williams</h4>
+            <p style="font-size:0.82rem; color:var(--text-secondary);">Marketing Lead, EduLearn</p>
+          </div>
+        </div>
+        <div style="color:#f59e0b; margin-bottom:14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.7;">
+          "Our cost per student lead decreased by 70% under Rifat's campaign funnels. The landing page conversions spiked and our sales team was overwhelmed with qualified registrants."
+        </p>
+      </div>
+
+      <div class="testimonial-card glass" style="padding:32px; border-radius:var(--radius-lg);">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--accent3); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff;">TB</div>
+          <div>
+            <h4 style="font-size:1.05rem; font-weight:700;">Tanvir Ahmed</h4>
+            <p style="font-size:0.82rem; color:var(--text-secondary);">Lead Creator, TechBD</p>
+          </div>
+        </div>
+        <div style="color:#f59e0b; margin-bottom:14px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.7;">
+          "From 5,000 to 50,000 subscribers in 6 months. Rifat's thumbnail composition and dynamic storytelling kept our click-through rate consistently above 11%. A true growth partner."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials (Khalid Farhan Style) -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</footer>
+
+<!-- Meeting Confirmed Success Modal -->
+<div class="booking-modal-overlay" id="homeBookingModal">
+  <div class="booking-modal" style="background:var(--bg-secondary); border:1px solid var(--border-glass-glow); border-radius:var(--radius-lg); max-width:520px; width:100%; padding:36px 30px; box-shadow:var(--shadow), 0 0 50px var(--accent-glow); text-align:center; position:relative;">
+    <div class="success-icon" style="width:72px; height:72px; border-radius:50%; background:rgba(34, 197, 94, 0.15); border:2px solid #22c55e; color:#22c55e; display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 18px; box-shadow:0 0 30px rgba(34, 197, 94, 0.3);">
+      <i class="fas fa-check"></i>
+    </div>
+    <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:8px;">Meeting Confirmed! 🎉</h3>
+    <p style="font-size:0.9rem; color:var(--text-secondary);">Your consultation session has been successfully booked with Faizul Islam Rifat.</p>
+
+    <div class="booking-summary-box" style="background:var(--bg-glass); border:1px solid var(--border-glass); border-radius:var(--radius-sm); padding:18px; text-align:left; margin:20px 0; font-size:0.9rem; line-height:1.8;">
+      <div><strong>👤 Client:</strong> <span id="homeModalClient">-</span></div>
+      <div><strong>📅 Date & Time:</strong> <span id="homeModalTime" style="color:var(--accent); font-weight:700;">-</span></div>
+      <div><strong>⏱️ Duration:</strong> <span id="homeModalDur">30 Minutes</span></div>
+      <div><strong>💻 Platform:</strong> <span id="homeModalPlat">Google Meet</span></div>
+      <div><strong>📌 Topic:</strong> <span id="homeModalTopic">-</span></div>
+    </div>
+
+    <div class="modal-actions" style="display:flex; flex-direction:column; gap:10px;">
+      <a id="homeBtnGcal" href="#" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center;">
+        <i class="fab fa-google"></i> Add to Google Calendar
+      </a>
+      <a id="homeBtnWa" href="#" target="_blank" class="btn btn-outline" style="width:100%; justify-content:center; border-color:#25d366; color:#25d366;">
+        <i class="fab fa-whatsapp"></i> Send Details to WhatsApp
+      </a>
+      <button type="button" onclick="document.getElementById('homeBookingModal').classList.remove('active')" class="btn btn-sm" style="background:transparent; color:var(--text-muted); border:none; margin-top:6px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="shared.js"></script>
+<script>
+// ============================================================
+// DYNAMIC TRANSLATIONS & INTERACTIVE SCHEDULER
+// ============================================================
+window.pageTranslations = {
+  en: {
+    kf_avail_tag: "Available for Hire",
+    kf_btn_book: "Book A Call",
+    td_hero_badge: "AI-Powered Video & Growth Consulting • 2026",
+    td_hero_title: 'Scale Your Business With <span class="accent">High-Converting Video</span> & Growth Strategy',
+    td_hero_desc: "I help modern brands, creators, and entrepreneurs drive exponential reach, lower acquisition costs, and maximize revenue through cinematic video production, performance ad funnels, and conversion-optimized web platforms.",
+    td_btn_consult: "Schedule 1-on-1 Call",
+    td_btn_studies: "Explore Case Studies",
+    td_brands_title: "Featured Across Modern Brand Campaigns & Case Studies",
+    fw_badge: "Core Offerings & Framework",
+    fw_title: 'How I Help You <span class="accent">Grow & Scale</span>',
+    fw_subtitle: "A complete end-to-end ecosystem engineered to turn cold attention into loyal brand advocates and revenue.",
+    s1_title: "Cinematic Video & Short-Form Pacing",
+    s1_desc: "Retention-engineered editing for Reels, TikToks, and YouTube. Mastered in Premiere Pro and DaVinci Resolve with psychological hooks, custom SFX, and kinetic typography.",
+    s1_f1: "Hook Design & 85%+ Audience Retention",
+    s1_f2: "DaVinci Studio Color Grading & Sound FX",
+    s1_f3: "High-Converting Social Media Promos",
+    btn_book_s1: "Book Video Session ↗",
+    s2_title: "Paid Performance & Funnel Ads",
+    s2_desc: "Profitable Meta & Google ad management built on precision tracking, aggressive A/B creative testing, and retargeting funnels that reduce cost-per-lead and multiply ROAS.",
+    s2_f1: "3-Tier Meta Pixel Funnel Architecture",
+    s2_f2: "Cost-Per-Lead (CPL) Diagnostic Reduction",
+    s2_f3: "High-ROAS E-Commerce Sales Campaigns",
+    btn_book_s2: "Book Marketing Audit ↗",
+    s3_title: "High-Converting Web Architecture",
+    s3_desc: "Blazing-fast responsive landing pages and WooCommerce digital storefronts designed for maximum conversion, 90+ PageSpeed scores, and local payment gateways.",
+    s3_f1: "Modern Glassmorphic Responsive Design",
+    s3_f2: "bKash, Nagad & Stripe Checkout Gateways",
+    s3_f3: "Mobile Speed & Conversion Optimization",
+    btn_book_s3: "Book Web Consultation ↗",
+    cs_badge: "Real Client Results",
+    cs_title: 'Featured <span class="accent">Case Studies</span>',
+    cs_subtitle: "Explore real-world client campaigns where creative execution met measurable business growth.",
+    sched_badge: "Live 1-on-1 Consultation",
+    sched_title: 'Schedule a Direct <span class="accent">Video Strategy Session</span>',
+    sched_subtitle: "Pick your preferred session length, date, and time slot to lock in a private strategy session via Google Meet or Zoom.",
+    m_projects: "Completed Projects",
+    m_roas: "Average Client ROAS",
+    m_reach: "Audience & Views Generated",
+    m_satisfaction: "Client Retention & Rating",
+    t_badge: "Client Feedback",
+    t_title: 'What Founders & <span class="accent">Creators Say</span>',
+    t_subtitle: "Feedback from startups, businesses, and content creators scaled with my work."
+  },
+  };
+
+// ============================================================
+// GOOGLE CALENDAR & WEBHOOK INTEGRATION
+// Google Apps Script Web App URL
+// ============================================================
+const GOOGLE_SCRIPT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyFtPp4KnrihB7pfGfoygrtXH8S6bxs85MJpsO9jgL9eHFNiTzRXxVAzy94ca7lZmbVSA/exec';
+
+// Scheduler State
+let homeDuration = 30;
+let homePlatform = "Google Meet";
+let homeDate = "";
+let homeSlot = "11:00 AM";
+
+function setSessionDuration(mins, btn) {
+  homeDuration = mins;
+  document.querySelectorAll('.duration-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = 'var(--bg-glass)';
+    b.style.borderColor = 'var(--border-glass)';
+  });
+  btn.classList.add('active');
+  btn.style.background = 'rgba(124, 92, 252, 0.18)';
+  btn.style.borderColor = 'var(--accent)';
+}
+
+function setMeetingPlatform(plat, btn) {
+  homePlatform = plat;
+  document.querySelectorAll('.platform-btn').forEach(b => {
+    b.classList.remove('active');
+    b.style.background = 'var(--bg-glass)';
+    b.style.borderColor = 'var(--border-glass)';
+    b.style.color = 'var(--text-secondary)';
+  });
+  btn.classList.add('active');
+  btn.style.background = 'rgba(0, 229, 255, 0.15)';
+  btn.style.borderColor = 'var(--accent2)';
+  btn.style.color = '#fff';
+}
+
+function setHomeSlot(slot, btn) {
+  homeSlot = slot;
+  document.querySelectorAll('#homeTimeSlots .time-slot-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Full Calendar for Homepage Scheduler
+let homeCalYear = 2026;
+let homeCalMonth = 10;
+let homeCalSelectedYear = 2026;
+let homeCalSelectedMonth = 10;
+let homeCalSelectedDay = 21;
+
+const homeCalI18n = {
+  en: {
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  },
+  };
+
+function initHomeCalendar() {
+  const monthSelect = document.getElementById('homeMonthSelect');
+  const yearInput = document.getElementById('homeYearInput');
+  const weekdaysHeader = document.getElementById('homeWeekdaysHeader');
+  if (!monthSelect || !yearInput || !weekdaysHeader) return;
+
+  const isBn = currentLang === 'bn';
+  const data = homeCalI18n[isBn ? 'bn' : 'en'];
+
+  monthSelect.innerHTML = '';
+  data.months.forEach((mName, idx) => {
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = `${(idx + 1).toString().padStart(2, '0')} - ${mName}`;
+    monthSelect.appendChild(opt);
+  });
+
+  weekdaysHeader.innerHTML = '';
+  data.weekdays.forEach(wd => {
+    const span = document.createElement('span');
+    span.textContent = wd;
+    weekdaysHeader.appendChild(span);
+  });
+
+  renderHomeCalendarGrid();
+  renderHomeDatePills();
+}
+
+function renderHomeDatePills() {
+  const wrap = document.getElementById('homeDateScrollWrap');
+  if (!wrap) return;
+
+  wrap.innerHTML = '';
+  const isBn = currentLang === 'bn';
+  const data = homeCalI18n[isBn ? 'bn' : 'en'];
+  const daysInMonth = new Date(homeCalYear, homeCalMonth + 1, 0).getDate();
+
+  let activePill = null;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(homeCalYear, homeCalMonth, d);
+    const day = data.weekdays[dateObj.getDay()];
+    const mon = data.months[homeCalMonth].substring(0, 3);
+    const isSelected = (homeCalYear === homeCalSelectedYear && homeCalMonth === homeCalSelectedMonth && d === homeCalSelectedDay);
+
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = `date-pill ${isSelected ? 'active' : ''}`;
+    pill.innerHTML = `
+      <span class="day-name">${day}</span>
+      <span class="day-num">${d}</span>
+      <span class="month-name">${mon}</span>
+    `;
+
+    pill.onclick = () => {
+      setHomeCalendarSelection(homeCalYear, homeCalMonth, d);
+      renderHomeCalendarGrid();
+      document.querySelectorAll('#homeDateScrollWrap .date-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const scrollPos = pill.offsetLeft - (wrap.clientWidth / 2) + (pill.clientWidth / 2);
+      wrap.scrollTo({ left: Math.max(0, scrollPos), behavior: 'smooth' });
+    };
+
+    wrap.appendChild(pill);
+    if (isSelected) activePill = pill;
+  }
+
+  // Smooth scroll active pill inside homeDateScrollWrap only without shifting ancestor card
+  if (activePill && wrap) {
+    setTimeout(() => {
+      const scrollPos = activePill.offsetLeft - (wrap.clientWidth / 2) + (activePill.clientWidth / 2);
+      wrap.scrollTo({ left: Math.max(0, scrollPos), behavior: 'smooth' });
+      const parentCard = wrap.closest('.scheduler-card');
+      if (parentCard) parentCard.scrollLeft = 0;
+    }, 100);
+  }
+}
+
+function renderHomeCalendarGrid() {
+  const monthSelect = document.getElementById('homeMonthSelect');
+  const yearInput = document.getElementById('homeYearInput');
+  const daysGrid = document.getElementById('homeDaysGrid');
+  const toggleBadge = document.getElementById('homeToggleBadge');
+  if (!daysGrid) return;
+
+  const isBn = currentLang === 'bn';
+  const data = homeCalI18n[isBn ? 'bn' : 'en'];
+
+  if (monthSelect) monthSelect.value = homeCalMonth;
+  if (yearInput) yearInput.value = homeCalYear;
+  if (toggleBadge) {
+    toggleBadge.textContent = `${data.months[homeCalMonth]} ${homeCalYear}`;
+  }
+
+  daysGrid.innerHTML = '';
+
+  const firstDayIndex = new Date(homeCalYear, homeCalMonth, 1).getDay();
+  const daysInMonth = new Date(homeCalYear, homeCalMonth + 1, 0).getDate();
+  const prevMonthDays = new Date(homeCalYear, homeCalMonth, 0).getDate();
+
+  const now = new Date();
+  const isThisMonth = (now.getFullYear() === homeCalYear && now.getMonth() === homeCalMonth);
+
+  for (let i = firstDayIndex - 1; i >= 0; i--) {
+    const day = prevMonthDays - i;
+    const cell = document.createElement('div');
+    cell.className = 'cal-day other-month';
+    cell.textContent = day;
+    cell.addEventListener('click', () => {
+      if (homeCalMonth === 0) {
+        homeCalMonth = 11;
+        homeCalYear = Math.max(2000, homeCalYear - 1);
+      } else {
+        homeCalMonth--;
+      }
+      setHomeCalendarSelection(homeCalYear, homeCalMonth, day);
+      renderHomeCalendarGrid();
+      renderHomeDatePills();
+    });
+    daysGrid.appendChild(cell);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-day';
+    cell.textContent = d;
+
+    if (isThisMonth && now.getDate() === d) {
+      cell.classList.add('today');
+    }
+
+    if (homeCalYear === homeCalSelectedYear && homeCalMonth === homeCalSelectedMonth && d === homeCalSelectedDay) {
+      cell.classList.add('active');
+    }
+
+    cell.addEventListener('click', () => {
+      setHomeCalendarSelection(homeCalYear, homeCalMonth, d);
+      renderHomeCalendarGrid();
+      renderHomeDatePills();
+
+      const drop = document.getElementById('homeDropdownWrap');
+      const btn = document.getElementById('homeToggleBtn');
+      if (drop && btn) {
+        drop.classList.remove('open');
+        btn.classList.remove('open');
+      }
+    });
+
+    daysGrid.appendChild(cell);
+  }
+
+  const totalCells = firstDayIndex + daysInMonth;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let d = 1; d <= remaining; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-day other-month';
+    cell.textContent = d;
+    cell.addEventListener('click', () => {
+      if (homeCalMonth === 11) {
+        homeCalMonth = 0;
+        homeCalYear = Math.min(5000, homeCalYear + 1);
+      } else {
+        homeCalMonth++;
+      }
+      setHomeCalendarSelection(homeCalYear, homeCalMonth, d);
+      renderHomeCalendarGrid();
+      renderHomeDatePills();
+    });
+    daysGrid.appendChild(cell);
+  }
+
+  updateHomeSelectedDateDisplay();
+}
+
+function setHomeCalendarSelection(y, m, d) {
+  homeCalSelectedYear = y;
+  homeCalSelectedMonth = m;
+  homeCalSelectedDay = d;
+  updateHomeSelectedDateDisplay();
+}
+
+function updateHomeSelectedDateDisplay() {
+  const isBn = currentLang === 'bn';
+  const data = homeCalI18n[isBn ? 'bn' : 'en'];
+  const dateObj = new Date(homeCalSelectedYear, homeCalSelectedMonth, homeCalSelectedDay);
+  const dayName = data.dayNames[dateObj.getDay()];
+  const monthName = data.months[homeCalSelectedMonth];
+
+  homeDate = `${homeCalI18n.en.dayNames[dateObj.getDay()]}, ${homeCalSelectedDay} ${homeCalI18n.en.months[homeCalSelectedMonth]} ${homeCalSelectedYear}`;
+
+  const selectedText = document.getElementById('homeSelectedDateText');
+  if (selectedText) {
+    selectedText.textContent = `${dayName}, ${homeCalSelectedDay} ${monthName} ${homeCalSelectedYear}`;
+  }
+}
+
+// Dropdown Window Toggle & Close Listeners
+const homeToggleBtn = document.getElementById('homeToggleBtn');
+const homeDropdownWrap = document.getElementById('homeDropdownWrap');
+const homeCloseBtn = document.getElementById('homeCloseBtn');
+
+if (homeToggleBtn && homeDropdownWrap) {
+  homeToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = homeDropdownWrap.classList.toggle('open');
+    homeToggleBtn.classList.toggle('open', isOpen);
+  });
+}
+
+if (homeCloseBtn && homeDropdownWrap && homeToggleBtn) {
+  homeCloseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    homeDropdownWrap.classList.remove('open');
+    homeToggleBtn.classList.remove('open');
+  });
+}
+
+document.addEventListener('click', (e) => {
+  if (homeDropdownWrap && homeToggleBtn && homeDropdownWrap.classList.contains('open')) {
+    if (!homeDropdownWrap.contains(e.target) && !homeToggleBtn.contains(e.target)) {
+      homeDropdownWrap.classList.remove('open');
+      homeToggleBtn.classList.remove('open');
+    }
+  }
+});
+
+// Home Calendar Listeners
+const homePrevMonth = document.getElementById('homePrevMonth');
+if (homePrevMonth) {
+  homePrevMonth.addEventListener('click', () => {
+    if (homeCalMonth === 0) {
+      homeCalMonth = 11;
+      homeCalYear = Math.max(2000, homeCalYear - 1);
+    } else {
+      homeCalMonth--;
+    }
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+const homeNextMonth = document.getElementById('homeNextMonth');
+if (homeNextMonth) {
+  homeNextMonth.addEventListener('click', () => {
+    if (homeCalMonth === 11) {
+      homeCalMonth = 0;
+      homeCalYear = Math.min(5000, homeCalYear + 1);
+    } else {
+      homeCalMonth++;
+    }
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+const homeMonthSelect = document.getElementById('homeMonthSelect');
+if (homeMonthSelect) {
+  homeMonthSelect.addEventListener('change', (e) => {
+    homeCalMonth = parseInt(e.target.value, 10);
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+const homeYearInput = document.getElementById('homeYearInput');
+if (homeYearInput) {
+  homeYearInput.addEventListener('change', (e) => {
+    const val = parseInt(e.target.value, 10);
+    if (!isNaN(val) && val >= 2000 && val <= 5000) {
+      homeCalYear = val;
+      renderHomeCalendarGrid();
+      renderHomeDatePills();
+    }
+  });
+}
+
+const homePrevYear = document.getElementById('homePrevYear');
+if (homePrevYear) {
+  homePrevYear.addEventListener('click', () => {
+    homeCalYear = Math.max(2000, homeCalYear - 1);
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+const homeNextYear = document.getElementById('homeNextYear');
+if (homeNextYear) {
+  homeNextYear.addEventListener('click', () => {
+    homeCalYear = Math.min(5000, homeCalYear + 1);
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+const homeTodayBtn = document.getElementById('homeTodayBtn');
+if (homeTodayBtn) {
+  homeTodayBtn.addEventListener('click', () => {
+    const t = new Date();
+    homeCalYear = t.getFullYear();
+    homeCalMonth = t.getMonth();
+    setHomeCalendarSelection(homeCalYear, homeCalMonth, t.getDate());
+    renderHomeCalendarGrid();
+    renderHomeDatePills();
+  });
+}
+
+window.addEventListener('langChanged', () => {
+  initHomeCalendar();
+});
+
+async function handleHomeBooking(e) {
+  e.preventDefault();
+  const form = document.getElementById('homeSchedulerForm');
+  const name = document.getElementById('homeBookName').value.trim();
+  const email = document.getElementById('homeBookEmail').value.trim();
+  const phone = document.getElementById('homeBookPhone').value.trim();
+  const topic = document.getElementById('homeBookTopic').value;
+
+  if (!name || !email || !phone) return;
+
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+  const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+  }
+
+  // Webhook Payload for Google Calendar
+  const bookingPayload = {
+    clientName: name,
+    clientEmail: email,
+    clientPhone: phone,
+    topic: topic,
+    platform: homePlatform,
+    duration: homeDuration,
+    timeStr: homeSlot,
+    dateStr: homeDate,
+    year: homeCalSelectedYear,
+    month: homeCalSelectedMonth,
+    day: homeCalSelectedDay
+  };
+
+  if (typeof GOOGLE_SCRIPT_WEBHOOK_URL !== 'undefined' && GOOGLE_SCRIPT_WEBHOOK_URL.trim() !== '') {
+    try {
+      await fetch(GOOGLE_SCRIPT_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(bookingPayload)
+      });
+    } catch (err) {
+      console.warn('Google Script Webhook notice:', err);
+    }
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+  }
+
+  document.getElementById('homeModalClient').textContent = name;
+  document.getElementById('homeModalTime').textContent = `${homeDate} at ${homeSlot} (GMT+6)`;
+  document.getElementById('homeModalDur').textContent = `${homeDuration} Minutes`;
+  document.getElementById('homeModalPlat').textContent = homePlatform;
+  document.getElementById('homeModalTopic').textContent = topic;
+
+  // Google Calendar URL
+  const title = encodeURIComponent(`1-on-1 Consultation: ${name} & Faizul Islam Rifat`);
+  const details = encodeURIComponent(`Session: ${topic}\nDuration: ${homeDuration} min\nPlatform: ${homePlatform}\nClient: ${name} (${phone}, ${email})`);
+  document.getElementById('homeBtnGcal').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${encodeURIComponent(homePlatform)}`;
+
+  // WhatsApp Message URL
+  const wa = encodeURIComponent(
+    `👋 Hi Faizul Islam Rifat,\n\nI just scheduled a ${homeDuration}-minute 1-on-1 Consultation on your website!\n\n` +
+    `📅 Date & Time: ${homeDate} at ${homeSlot} (GMT+6)\n` +
+    `💻 Platform: ${homePlatform}\n` +
+    `📌 Topic: ${topic}\n\n` +
+    `👤 Name: ${name}\n` +
+    `📧 Email: ${email}\n` +
+    `📱 WhatsApp: ${phone}\n\nPlease confirm our meeting link.`
+  );
+  document.getElementById('homeBtnWa').href = `https://wa.me/8801834581975?text=${wa}`;
+
+  document.getElementById('homeBookingModal').classList.add('active');
+  fireConfetti();
+  showToast(currentLang === 'bn' ? '🎉 মিটিং সফলভাবে বুক করা হয়েছে!' : '🎉 Session scheduled successfully!', 'success');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHomeCalendar();
+});
+</script>
+</body>
+</html>

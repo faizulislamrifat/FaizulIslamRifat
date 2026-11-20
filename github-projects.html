@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Projects & Open Source Tools — Faizul Islam Rifat</title>
+<meta name="description" content="Explore official open-source tools created by Faizul Islam Rifat on GitHub: AutoFlow (Google Flow batch video automation), maklu-cut (AI viral clip generator), and personal portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ============================================================
+   GITHUB PROJECTS PAGE SPECIFIC STYLES
+   ============================================================ */
+
+/* Developer Profile Banner */
+.gh-profile-card {
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-glass-glow);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+.gh-profile-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.gh-avatar-wrap {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 24px var(--accent-glow);
+  flex-shrink: 0;
+}
+.gh-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: var(--bg-secondary);
+}
+.gh-avatar-badge {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #181717;
+  color: #fff;
+  border: 2px solid var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.gh-profile-info h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gh-username {
+  font-size: 0.95rem;
+  color: var(--accent2);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+.gh-bio {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+.gh-meta-tags {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.gh-meta-tags span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.gh-meta-tags i {
+  color: var(--accent);
+}
+.gh-profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* GitHub Quick Stats Row */
+.gh-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.gh-stat-box {
+  padding: 24px;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid var(--border-glass);
+  transition: transform var(--transition), border-color var(--transition);
+}
+.gh-stat-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glass-glow);
+}
+.gh-stat-icon {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.gh-stat-num {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  font-family: var(--font-main);
+}
+.gh-stat-label {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Controls Bar (Filter, Search, Sort) */
+.gh-controls-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.gh-search-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.gh-search-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+.gh-search-input-wrap i.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.gh-search-input {
+  width: 100%;
+  padding: 14px 18px 14px 48px;
+  border-radius: 50px;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  outline: none;
+  transition: all var(--transition);
+}
+.gh-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+  background: var(--bg-secondary);
+}
+.gh-sort-select {
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  outline: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.gh-sort-select:hover, .gh-sort-select:focus {
+  border-color: var(--accent);
+}
+.gh-sort-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.gh-filter-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.gh-filter-pill {
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  font-family: var(--font-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-filter-pill.active, .gh-filter-pill:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+/* Repositories Grid (Showcase 3 Featured Projects) */
+.gh-repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 30px;
+  margin-bottom: 70px;
+}
+.gh-repo-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.gh-repo-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-glass-glow);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+}
+.gh-repo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0.8;
+}
+.gh-repo-top-badge {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(124, 92, 252, 0.18);
+  border: 1px solid rgba(124, 92, 252, 0.35);
+  color: var(--accent2);
+}
+.gh-repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  margin-top: 6px;
+}
+.gh-repo-name-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.gh-repo-icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.gh-repo-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: color var(--transition);
+  text-decoration: none;
+}
+.gh-repo-title:hover {
+  color: var(--accent2);
+  text-decoration: underline;
+}
+.gh-repo-headline {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent2);
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+.gh-repo-desc {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.gh-repo-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-repo-features li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.gh-repo-features li i {
+  color: var(--accent);
+  margin-top: 3px;
+  font-size: 0.78rem;
+}
+.gh-repo-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.gh-repo-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(124, 92, 252, 0.12);
+  border: 1px solid rgba(124, 92, 252, 0.22);
+  color: #c4b5fd;
+}
+
+.gh-repo-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-glass);
+  margin-bottom: 18px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+.gh-lang-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.gh-lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.gh-stats-items {
+  display: flex;
+  gap: 14px;
+}
+.gh-stats-items span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.gh-stats-items i {
+  font-size: 0.8rem;
+}
+
+/* Card Action Buttons */
+.gh-repo-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.gh-repo-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  transition: all var(--transition);
+}
+.gh-repo-btn:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--accent);
+  color: #fff;
+}
+.gh-repo-btn.btn-primary-action {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.gh-repo-btn.btn-primary-action:hover {
+  background: #6a49f5;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+.gh-copy-btn {
+  position: relative;
+}
+
+/* Live GitHub Sync Section */
+.gh-sync-banner {
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  margin-bottom: 70px;
+  border: 1px dashed var(--border-glass-glow);
+  background: radial-gradient(circle at center, rgba(124, 92, 252, 0.08) 0%, transparent 70%);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.gh-sync-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.gh-sync-title h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gh-sync-input-row {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Empty State / Not Found */
+.gh-empty-state {
+  grid-column: 1 / -1;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.gh-empty-state i {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN & MOBILE VIEW OPTIMIZATIONS
+   ============================================================ */
+@media (max-width: 900px) {
+  .gh-profile-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 30px 22px;
+    gap: 20px;
+  }
+  .gh-avatar-wrap {
+    margin: 0 auto;
+  }
+  .gh-profile-actions {
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .gh-meta-tags {
+    justify-content: center;
+  }
+  .gh-profile-info h2 {
+    justify-content: center;
+  }
+  .gh-repos-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Hero Section spacing */
+  .section.text-center {
+    padding-top: 20px !important;
+    padding-bottom: 18px !important;
+  }
+  .section-title {
+    font-size: 1.7rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+  }
+  .section-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* Profile Banner Mobile */
+  .gh-profile-card {
+    padding: 24px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+  }
+  .gh-avatar-wrap {
+    width: 90px;
+    height: 90px;
+  }
+  .gh-avatar-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+  .gh-profile-info h2 {
+    font-size: 1.35rem;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .gh-username {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+  .gh-bio {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .gh-meta-tags {
+    gap: 6px 12px;
+    font-size: 0.78rem;
+  }
+  .gh-profile-actions {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  .gh-profile-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  /* 2x2 Compact Stats Grid */
+  .gh-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .gh-stat-box {
+    padding: 14px 10px;
+    border-radius: 12px;
+  }
+  .gh-stat-icon {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+  }
+  .gh-stat-num {
+    font-size: 1.55rem;
+    margin-bottom: 2px;
+  }
+  .gh-stat-label {
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+
+  /* Search & Controls Mobile */
+  .gh-controls-bar {
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .gh-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .gh-search-input-wrap {
+    min-width: 100%;
+    width: 100%;
+  }
+  .gh-search-input {
+    padding: 12px 16px 12px 42px;
+    font-size: 0.88rem;
+  }
+  .gh-sort-select {
+    width: 100%;
+    padding: 11px 16px;
+    font-size: 0.85rem;
+  }
+
+  /* Horizontal Touch Scroll for Filter Pills */
+  .gh-filter-pills {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding: 2px 2px 8px 2px;
+    scrollbar-width: none;
+    margin: 0 -4px;
+  }
+  .gh-filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .gh-filter-pill {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  /* Repository Cards Mobile */
+  .gh-repos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+  .gh-repo-card {
+    padding: 20px 16px;
+    border-radius: var(--radius);
+  }
+  .gh-repo-top-badge {
+    position: static;
+    display: inline-flex;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  .gh-repo-header {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+  .gh-repo-title {
+    font-size: 1.15rem;
+  }
+  .gh-repo-headline {
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .gh-repo-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .gh-repo-features {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .gh-repo-features li {
+    font-size: 0.8rem;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .gh-repo-tags {
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+  .gh-repo-tag {
+    font-size: 0.7rem;
+    padding: 2px 7px;
+  }
+  .gh-repo-meta-bar {
+    padding-top: 10px;
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+  }
+
+  /* Action Buttons Mobile: Clean 2-column grid with full-width primary button */
+  .gh-repo-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+  .gh-repo-actions .btn-primary-action {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
+    padding: 11px 14px;
+    font-size: 0.86rem;
+  }
+  .gh-repo-actions .gh-repo-btn:not(.btn-primary-action) {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  /* Live Verification Banner Mobile */
+  .gh-sync-banner {
+    padding: 20px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 35px;
+  }
+  .gh-sync-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .gh-sync-title h3 {
+    font-size: 1.15rem;
+  }
+  .gh-sync-title p {
+    font-size: 0.82rem !important;
+  }
+  .gh-sync-input-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+  #liveGhUser {
+    width: 100%;
+    font-size: 0.88rem;
+  }
+  #btnSyncLiveGh {
+    width: 100%;
+    justify-content: center;
+    padding: 11px;
+    font-size: 0.86rem;
+  }
+
+  /* Collaboration CTA Mobile */
+  .cta-banner {
+    padding: 32px 16px !important;
+  }
+  .cta-banner .section-title {
+    font-size: 1.4rem !important;
+  }
+  .cta-banner .section-subtitle {
+    font-size: 0.85rem !important;
+    margin-bottom: 18px !important;
+  }
+  .cta-banner div[style*="display:flex"] {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px !important;
+  }
+  .cta-banner .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .gh-profile-card {
+    padding: 18px 12px;
+  }
+  .gh-repo-card {
+    padding: 18px 12px;
+  }
+  .gh-stat-num {
+    font-size: 1.35rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE UNIFIED HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="github-projects.html" class="active">GitHub Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html">Skills & Stack</a>
+  <a href="github-projects.html" class="active">GitHub Projects</a>
+  <a href="contact.html">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="container">
+
+  <!-- Breadcrumbs & Hero Header -->
+  <section class="section text-center" style="padding-top:40px; padding-bottom:30px;">
+    <div class="hero-badge reveal" style="display:inline-flex; align-items:center; gap:8px; margin-bottom:16px;">
+      <i class="fab fa-github"></i> <span data-i18n="gh_hero_badge">Official Open Source Repositories</span>
+    </div>
+    <h1 class="section-title reveal" data-i18n="gh_hero_title">
+      My GitHub <span class="accent">Projects</span> & Tools
+    </h1>
+    <p class="section-subtitle reveal" data-i18n="gh_hero_subtitle">
+      Explore official open-source software, Chrome extensions, video automation pipelines, and codebases authored by Faizul Islam Rifat.
+    </p>
+    <div style="display:flex; justify-content:center; width:100%;">
+      <div class="breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-i18n="nav_github_projects">GitHub Projects</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub Profile Banner Card -->
+  <div class="gh-profile-card glass reveal">
+    <div class="gh-avatar-wrap">
+      <img src="rifat-glasses.jpg" alt="Faizul Islam Rifat" loading="lazy" onerror="this.src='rifat-photo.jpg'">
+      <div class="gh-avatar-badge" title="Verified GitHub Creator"><i class="fab fa-github"></i></div>
+    </div>
+    <div class="gh-profile-info">
+      <h2>
+        <span>Faizul Islam Rifat</span>
+        <i class="fas fa-check-circle" style="color:var(--accent2); font-size:1.1rem;" title="Verified Profile"></i>
+      </h2>
+      <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="gh-username">
+        <i class="fab fa-github"></i> @faizulislamrifat
+      </a>
+      <p class="gh-bio" data-i18n="gh_profile_bio">
+        Creator of AutoFlow (Google Flow Batch Studio) and maklu-cut (AI Viral Video Clipping Pipeline). Specializing in AI tool creation, batch prompt engineering, video workflow automation, and modern web applications.
+      </p>
+      <div class="gh-meta-tags">
+        <span><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</span>
+        <span><i class="fas fa-code-branch"></i> 3 Featured Open-Source Projects</span>
+        <span><i class="fas fa-bolt"></i> Chrome Extension • Python • Node.js • AI Automation</span>
+      </div>
+    </div>
+    <div class="gh-profile-actions">
+      <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+        <i class="fab fa-github"></i> <span data-i18n="gh_btn_follow">Follow on GitHub</span>
+      </a>
+      <a href="contact.html#scheduler" class="btn btn-outline btn-sm">
+        <i class="fas fa-calendar-alt"></i> <span data-i18n="gh_btn_hire">Hire for Project</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="gh-stats-grid reveal">
+    <div class="gh-stat-box glass">
+      <div class="gh-stat-icon"><i class="fas fa-code-branch"></i></div>
+      <div class="gh-stat-num">3</div>
+      <div class="gh-stat-label" data-i18n="gh_stat_repos">Authored Projects</div>
+    </div>
+    <div class="gh-stat-box glass">
+      <div class="gh-stat-icon"><i class="fas fa-video"></i></div>
+      <div class="gh-stat-num">100%</div>
+      <div class="gh-stat-label" data-i18n="gh_stat_video_focus">AI & Video Automation</div>
+    </div>
+    <div class="gh-stat-box glass">
+      <div class="gh-stat-icon"><i class="fas fa-puzzle-piece"></i></div>
+      <div class="gh-stat-num">v2.7+</div>
+      <div class="gh-stat-label" data-i18n="gh_stat_production">Production Extension</div>
+    </div>
+    <div class="gh-stat-box glass">
+      <div class="gh-stat-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="gh-stat-num">100%</div>
+      <div class="gh-stat-label" data-i18n="gh_stat_opensource">Free & Open Source</div>
+    </div>
+  </div>
+
+  <!-- Interactive Controls Bar -->
+  <div class="gh-controls-bar reveal">
+    <div class="gh-search-row">
+      <div class="gh-search-input-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="repoSearchInput" class="gh-search-input" placeholder="Search my projects (AutoFlow, maklu-cut, portfolio)..." data-i18n-placeholder="gh_search_placeholder">
+      </div>
+      <select id="repoSortSelect" class="gh-sort-select" aria-label="Sort Repositories">
+        <option value="featured">⭐ Featured Repositories</option>
+        <option value="name">🔤 Alphabetical (A-Z)</option>
+      </select>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="gh-filter-pills" id="repoFilterPills">
+      <button class="gh-filter-pill active" data-filter="all">
+        <i class="fas fa-border-all"></i> <span data-i18n="gh_f_all">All Projects</span> (3)
+      </button>
+      <button class="gh-filter-pill" data-filter="video-auto">
+        <i class="fas fa-video"></i> <span data-i18n="gh_f_video">AI & Video Automation</span> (2)
+      </button>
+      <button class="gh-filter-pill" data-filter="extension">
+        <i class="fas fa-puzzle-piece"></i> <span data-i18n="gh_f_ext">Chrome Extensions</span> (1)
+      </button>
+      <button class="gh-filter-pill" data-filter="portfolio">
+        <i class="fas fa-laptop-code"></i> <span data-i18n="gh_f_portfolio">Portfolio & Web</span> (1)
+      </button>
+    </div>
+  </div>
+
+  <!-- Repositories Grid: ONLY 3 AUTHORED PROJECTS -->
+  <div class="gh-repos-grid reveal" id="reposGrid">
+
+    <!-- Project 1: AutoFlow -->
+    <div class="gh-repo-card glass" data-category="video-auto extension" data-stars="50" data-name="AutoFlow">
+      <span class="gh-repo-top-badge"><i class="fas fa-bolt"></i> v2.7.1 Extension</span>
+      <div class="gh-repo-header">
+        <div class="gh-repo-name-wrap">
+          <i class="fas fa-bolt gh-repo-icon" style="color:#00e5ff;"></i>
+          <a href="https://github.com/faizulislamrifat/AutoFlow" target="_blank" rel="noopener noreferrer" class="gh-repo-title">
+            AutoFlow
+          </a>
+        </div>
+      </div>
+      <div class="gh-repo-headline" data-i18n="repo_autoflow_hl">
+        Batch Studio for Google Flow — The Ultimate Bulk Video Generator Studio
+      </div>
+      <p class="gh-repo-desc" data-i18n="repo_autoflow_desc">
+        High-performance Chrome Extension tailored exclusively for Google Flow creators. Streamlines repetitive prompt entry into an intelligent, hands-free automated pipeline—allowing you to queue hundreds of prompts, run batch video generations, handle retries gracefully, and download completed clips automatically.
+      </p>
+      <ul class="gh-repo-features">
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="af_ft1">One-Click Multi-Prompt Batch Queueing with auto execution</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="af_ft2">Cyber-Luxury glassmorphic side panel UI for easy monitoring</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="af_ft3">Smart retry on pending states & automated video downloader to local storage</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="af_ft4">CSV & Google Sheets bulk prompt table importer with custom tags</span></li>
+      </ul>
+      <div class="gh-repo-tags">
+        <span class="gh-repo-tag">#ChromeExtension</span>
+        <span class="gh-repo-tag">#GoogleFlow</span>
+        <span class="gh-repo-tag">#BatchPrompt</span>
+        <span class="gh-repo-tag">#VideoAutomation</span>
+        <span class="gh-repo-tag">#AIStudio</span>
+        <span class="gh-repo-tag">#JavaScript</span>
+      </div>
+      <div class="gh-repo-meta-bar">
+        <span class="gh-lang-indicator">
+          <span class="gh-lang-dot" style="background:#f1e05a;"></span> JavaScript / Extension
+        </span>
+        <div class="gh-stats-items">
+          <span><i class="fab fa-google-chrome"></i> v2.7.1</span>
+          <span><i class="fas fa-balance-scale"></i> MIT</span>
+        </div>
+      </div>
+      <div class="gh-repo-actions">
+        <a href="https://github.com/faizulislamrifat/AutoFlow" target="_blank" rel="noopener noreferrer" class="gh-repo-btn btn-primary-action">
+          <i class="fab fa-github"></i> <span data-i18n="gh_btn_code">View Repository</span>
+        </a>
+        <a href="https://github.com/faizulislamrifat/AutoFlow#readme" target="_blank" rel="noopener noreferrer" class="gh-repo-btn">
+          <i class="fas fa-book-open"></i> <span data-i18n="gh_btn_docs">Documentation</span>
+        </a>
+        <button class="gh-repo-btn gh-copy-btn" onclick="copyClone('https://github.com/faizulislamrifat/AutoFlow.git', this)">
+          <i class="far fa-copy"></i> <span>Clone</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Project 2: maklu-cut -->
+    <div class="gh-repo-card glass" data-category="video-auto" data-stars="40" data-name="maklu-cut">
+      <span class="gh-repo-top-badge" style="color:#ff6bcb; border-color:rgba(255,107,203,0.35); background:rgba(255,107,203,0.15);"><i class="fas fa-film"></i> AI Video Clipper</span>
+      <div class="gh-repo-header">
+        <div class="gh-repo-name-wrap">
+          <i class="fas fa-scissors gh-repo-icon" style="color:#ff6bcb;"></i>
+          <a href="https://github.com/faizulislamrifat/maklu-cut" target="_blank" rel="noopener noreferrer" class="gh-repo-title">
+            maklu-cut
+          </a>
+        </div>
+      </div>
+      <div class="gh-repo-headline" data-i18n="repo_maklu_hl">
+        Turn Long Videos & Podcasts into Viral Captioned Shorts, Reels & TikToks
+      </div>
+      <p class="gh-repo-desc" data-i18n="repo_maklu_desc">
+        Free and open-source automated video clipping engine. Paste a YouTube, Twitch or Kick link (or upload a local file) and MAKLU CUT automatically scouts conversational peaks, formats clips into 9:16 vertical video, adds animated word-by-word captions with custom Bengali fonts, and auto-posts them to social channels.
+      </p>
+      <ul class="gh-repo-features">
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="mc_ft1">AI-Powered Clip Scout analyzing conversational and emotional peaks</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="mc_ft2">Bengali typography support: Hind Siliguri, Kalpurush, Noto Sans Bengali</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="mc_ft3">Multi-format export: 9:16 Vertical, 1:1 Square, and 16:9 Landscape</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="mc_ft4">Bouncy word-by-word animated captions with auto social posting</span></li>
+      </ul>
+      <div class="gh-repo-tags">
+        <span class="gh-repo-tag">#VideoClips</span>
+        <span class="gh-repo-tag">#ShortsReels</span>
+        <span class="gh-repo-tag">#BengaliFonts</span>
+        <span class="gh-repo-tag">#WhisperAI</span>
+        <span class="gh-repo-tag">#FFmpeg</span>
+        <span class="gh-repo-tag">#Python</span>
+      </div>
+      <div class="gh-repo-meta-bar">
+        <span class="gh-lang-indicator">
+          <span class="gh-lang-dot" style="background:#3572A5;"></span> Python / FFmpeg
+        </span>
+        <div class="gh-stats-items">
+          <span><i class="fas fa-mobile-alt"></i> 9:16 Shorts</span>
+          <span><i class="fas fa-balance-scale"></i> MIT</span>
+        </div>
+      </div>
+      <div class="gh-repo-actions">
+        <a href="https://github.com/faizulislamrifat/maklu-cut" target="_blank" rel="noopener noreferrer" class="gh-repo-btn btn-primary-action">
+          <i class="fab fa-github"></i> <span data-i18n="gh_btn_code">View Repository</span>
+        </a>
+        <a href="https://github.com/faizulislamrifat/maklu-cut#readme" target="_blank" rel="noopener noreferrer" class="gh-repo-btn">
+          <i class="fas fa-book-open"></i> <span data-i18n="gh_btn_docs">Documentation</span>
+        </a>
+        <button class="gh-repo-btn gh-copy-btn" onclick="copyClone('https://github.com/faizulislamrifat/maklu-cut.git', this)">
+          <i class="far fa-copy"></i> <span>Clone</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Project 3: FaizulIslamRifat (Portfolio & Showcase) -->
+    <div class="gh-repo-card glass" data-category="portfolio" data-stars="30" data-name="FaizulIslamRifat">
+      <span class="gh-repo-top-badge" style="color:#22c55e; border-color:rgba(34,197,94,0.35); background:rgba(34,197,94,0.15);"><i class="fas fa-globe"></i> Official Site</span>
+      <div class="gh-repo-header">
+        <div class="gh-repo-name-wrap">
+          <i class="fas fa-user-astronaut gh-repo-icon" style="color:#22c55e;"></i>
+          <a href="https://github.com/faizulislamrifat/FaizulIslamRifat" target="_blank" rel="noopener noreferrer" class="gh-repo-title">
+            FaizulIslamRifat
+          </a>
+        </div>
+      </div>
+      <div class="gh-repo-headline" data-i18n="repo_portfolio_hl">
+        Official Personal Portfolio, Case Studies & Automated Booking System
+      </div>
+      <p class="gh-repo-desc" data-i18n="repo_portfolio_desc">
+        Complete source codebase of Faizul Islam Rifat's high-converting personal brand website. Engineered with a responsive Khalid Farhan glassmorphism design, zero-FOUC bilingual i18n engine (EN/BN), Google Apps Script calendar booking API, and instant Telegram notification push webhooks.
+      </p>
+      <ul class="gh-repo-features">
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="pf_ft1">Modern Glassmorphism UI with responsive multi-column layouts</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="pf_ft2">Integrated Google Calendar 1-on-1 Strategy Session scheduler</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="pf_ft3">Real-time Telegram bot webhook notification alert integration</span></li>
+        <li><i class="fas fa-check-circle"></i> <span data-i18n="pf_ft4">Bilingual support (English & Bengali) and automatic OS theme sync</span></li>
+      </ul>
+      <div class="gh-repo-tags">
+        <span class="gh-repo-tag">#PersonalBrand</span>
+        <span class="gh-repo-tag">#Glassmorphism</span>
+        <span class="gh-repo-tag">#GoogleCalendarAPI</span>
+        <span class="gh-repo-tag">#TelegramBot</span>
+        <span class="gh-repo-tag">#JavaScript</span>
+        <span class="gh-repo-tag">#i18n</span>
+      </div>
+      <div class="gh-repo-meta-bar">
+        <span class="gh-lang-indicator">
+          <span class="gh-lang-dot" style="background:#e34c26;"></span> HTML5 / JS / CSS3
+        </span>
+        <div class="gh-stats-items">
+          <span><i class="fas fa-check-circle" style="color:var(--success);"></i> Live</span>
+          <span><i class="fas fa-balance-scale"></i> MIT</span>
+        </div>
+      </div>
+      <div class="gh-repo-actions">
+        <a href="https://github.com/faizulislamrifat/FaizulIslamRifat" target="_blank" rel="noopener noreferrer" class="gh-repo-btn btn-primary-action">
+          <i class="fab fa-github"></i> <span data-i18n="gh_btn_code">View Repository</span>
+        </a>
+        <a href="index.html" class="gh-repo-btn">
+          <i class="fas fa-play"></i> <span data-i18n="gh_btn_live">Live Website</span>
+        </a>
+        <button class="gh-repo-btn gh-copy-btn" onclick="copyClone('https://github.com/faizulislamrifat/FaizulIslamRifat.git', this)">
+          <i class="far fa-copy"></i> <span>Clone</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Live GitHub API Explorer Banner -->
+  <div class="gh-sync-banner reveal">
+    <div class="gh-sync-header">
+      <div class="gh-sync-title">
+        <h3>
+          <i class="fab fa-github" style="color:var(--accent);"></i>
+          <span data-i18n="gh_sync_title">Live GitHub Account Verification</span>
+        </h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:4px;" data-i18n="gh_sync_sub">
+          Verify and inspect public repositories directly from @faizulislamrifat on GitHub's REST API.
+        </p>
+      </div>
+      <div class="gh-sync-input-row">
+        <input type="text" id="liveGhUser" class="gh-search-input" value="faizulislamrifat" placeholder="Enter GitHub username" style="border-radius:10px; padding:10px 16px;">
+        <button class="btn btn-primary btn-sm" id="btnSyncLiveGh" type="button" style="white-space:nowrap;">
+          <i class="fas fa-sync-alt"></i> <span data-i18n="gh_btn_sync">Verify Live</span>
+        </button>
+      </div>
+    </div>
+    <div id="liveSyncStatus" style="font-size:0.86rem; color:var(--accent2); display:none;"></div>
+  </div>
+
+  <!-- Collaboration CTA Banner -->
+  <section class="section reveal" style="padding-bottom:80px;">
+    <div class="cta-banner glass text-center" style="border:1px solid var(--border-glass-glow); padding:50px 30px; border-radius:var(--radius-lg); position:relative; overflow:hidden;">
+      <span class="hero-badge" style="margin-bottom:14px; display:inline-block;" data-i18n="gh_cta_badge">Open Source & Automation Development</span>
+      <h2 class="section-title" style="margin-bottom:12px;" data-i18n="gh_cta_title">
+        Need a Custom AI Video Pipeline or <span class="accent">Chrome Extension</span>?
+      </h2>
+      <p class="section-subtitle" style="margin-bottom:28px; max-width:650px; margin-left:auto; margin-right:auto;" data-i18n="gh_cta_desc">
+        From prompt batch studios and AI clipping pipelines to full-stack web applications, let's turn your vision into high-performance software.
+      </p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html#scheduler" class="btn btn-primary">
+          <i class="fas fa-calendar-alt"></i> <span data-i18n="kf_btn_book">Book A Call</span>
+        </a>
+        <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <i class="fab fa-whatsapp"></i> <span>WhatsApp Chat</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html" class="active" style="color:var(--accent); font-weight:700;">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Shared JS -->
+<script src="shared.js"></script>
+
+<!-- Page Specific JS & Translations -->
+<script>
+// Page Translations for GitHub Projects
+window.pageTranslations = {
+  en: {
+    gh_hero_badge: "Official Open Source Repositories",
+    gh_hero_title: 'My GitHub <span class="accent">Projects</span> & Tools',
+    gh_hero_subtitle: "Explore official open-source software, Chrome extensions, video automation pipelines, and codebases authored by Faizul Islam Rifat.",
+    gh_profile_bio: "Creator of AutoFlow (Google Flow Batch Studio) and maklu-cut (AI Viral Video Clipping Pipeline). Specializing in AI tool creation, batch prompt engineering, video workflow automation, and modern web applications.",
+    gh_btn_follow: "Follow on GitHub",
+    gh_btn_hire: "Hire for Project",
+    gh_stat_repos: "Authored Projects",
+    gh_stat_video_focus: "AI & Video Automation",
+    gh_stat_production: "Production Extension",
+    gh_stat_opensource: "Free & Open Source",
+    gh_search_placeholder: "Search my projects (AutoFlow, maklu-cut, portfolio)...",
+    gh_f_all: "All Projects",
+    gh_f_video: "AI & Video Automation",
+    gh_f_ext: "Chrome Extensions",
+    gh_f_portfolio: "Portfolio & Web",
+    gh_btn_code: "View Repository",
+    gh_btn_docs: "Documentation",
+    gh_btn_live: "Live Website",
+    gh_sync_title: "Live GitHub Account Verification",
+    gh_sync_sub: "Verify and inspect public repositories directly from @faizulislamrifat on GitHub's REST API.",
+    gh_btn_sync: "Verify Live",
+    gh_cta_badge: "Open Source & Automation Development",
+    gh_cta_title: 'Need a Custom AI Video Pipeline or <span class="accent">Chrome Extension</span>?',
+    gh_cta_desc: "From prompt batch studios and AI clipping pipelines to full-stack web applications, let's turn your vision into high-performance software.",
+    repo_autoflow_hl: "Batch Studio for Google Flow — The Ultimate Bulk Video Generator Studio",
+    repo_autoflow_desc: "High-performance Chrome Extension tailored exclusively for Google Flow creators. Streamlines repetitive prompt entry into an intelligent, hands-free automated pipeline—allowing you to queue hundreds of prompts, run batch video generations, handle retries gracefully, and download completed clips automatically.",
+    af_ft1: "One-Click Multi-Prompt Batch Queueing with auto execution",
+    af_ft2: "Cyber-Luxury glassmorphic side panel UI for easy monitoring",
+    af_ft3: "Smart retry on pending states & automated video downloader to local storage",
+    af_ft4: "CSV & Google Sheets bulk prompt table importer with custom tags",
+    repo_maklu_hl: "Turn Long Videos & Podcasts into Viral Captioned Shorts, Reels & TikToks",
+    repo_maklu_desc: "Free and open-source automated video clipping engine. Paste a YouTube, Twitch or Kick link (or upload a local file) and MAKLU CUT automatically scouts conversational peaks, formats clips into 9:16 vertical video, adds animated word-by-word captions with custom Bengali fonts, and auto-posts them to social channels.",
+    mc_ft1: "AI-Powered Clip Scout analyzing conversational and emotional peaks",
+    mc_ft2: "Bengali typography support: Hind Siliguri, Kalpurush, Noto Sans Bengali",
+    mc_ft3: "Multi-format export: 9:16 Vertical, 1:1 Square, and 16:9 Landscape",
+    mc_ft4: "Bouncy word-by-word animated captions with auto social posting",
+    repo_portfolio_hl: "Official Personal Portfolio, Case Studies & Automated Booking System",
+    repo_portfolio_desc: "Complete source codebase of Faizul Islam Rifat's high-converting personal brand website. Engineered with a responsive Khalid Farhan glassmorphism design, zero-FOUC bilingual i18n engine (EN/BN), Google Apps Script calendar booking API, and instant Telegram notification push webhooks.",
+    pf_ft1: "Modern Glassmorphism UI with responsive multi-column layouts",
+    pf_ft2: "Integrated Google Calendar 1-on-1 Strategy Session scheduler",
+    pf_ft3: "Real-time Telegram bot webhook notification alert integration",
+    pf_ft4: "Bilingual support (English & Bengali) and automatic OS theme sync"
+  },
+  };
+
+// Clipboard copy helper
+function copyClone(url, btn) {
+  navigator.clipboard.writeText('git clone ' + url).then(() => {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> <span>Copied!</span>';
+    btn.style.borderColor = 'var(--success)';
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 30, spread: 60, origin: { y: 0.8 } });
+    }
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.borderColor = '';
+    }, 2500);
+  }).catch(() => {
+    alert('Clone URL: git clone ' + url);
+  });
+}
+
+// Client-side Filter, Search, and Sort Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('repoSearchInput');
+  const sortSelect = document.getElementById('repoSortSelect');
+  const filterPills = document.querySelectorAll('.gh-filter-pill');
+  const reposGrid = document.getElementById('reposGrid');
+  const cards = Array.from(document.querySelectorAll('.gh-repo-card'));
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  function applyFilters() {
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const category = card.getAttribute('data-category') || '';
+      const name = (card.getAttribute('data-name') || '').toLowerCase();
+      const desc = (card.querySelector('.gh-repo-desc')?.textContent || '').toLowerCase();
+      const hl = (card.querySelector('.gh-repo-headline')?.textContent || '').toLowerCase();
+      const tags = (card.querySelector('.gh-repo-tags')?.textContent || '').toLowerCase();
+
+      const matchesFilter = (currentFilter === 'all') || category.includes(currentFilter);
+      const matchesSearch = !currentSearch || name.includes(currentSearch) || desc.includes(currentSearch) || hl.includes(currentSearch) || tags.includes(currentSearch);
+
+      if (matchesFilter && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Handle Empty State
+    let emptyEl = document.getElementById('ghEmptyState');
+    if (visibleCount === 0) {
+      if (!emptyEl) {
+        emptyEl = document.createElement('div');
+        emptyEl.id = 'ghEmptyState';
+        emptyEl.className = 'gh-empty-state';
+        emptyEl.innerHTML = '<i class="fab fa-github"></i><h3>No matching projects found</h3><p>Try clearing your search term or selecting All Projects.</p>';
+        reposGrid.appendChild(emptyEl);
+      }
+      emptyEl.style.display = 'block';
+    } else if (emptyEl) {
+      emptyEl.style.display = 'none';
+    }
+  }
+
+  // Filter Pill clicks
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      currentFilter = pill.getAttribute('data-filter') || 'all';
+      applyFilters();
+    });
+  });
+
+  // Search input
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+  }
+
+  // Sorting
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      const val = sortSelect.value;
+      const sorted = [...cards].sort((a, b) => {
+        if (val === 'name') {
+          return (a.getAttribute('data-name') || '').localeCompare(b.getAttribute('data-name') || '');
+        }
+        return 0; // featured maintains default order
+      });
+      sorted.forEach(c => reposGrid.appendChild(c));
+    });
+  }
+
+  // Live GitHub Account Sync Button
+  const btnSync = document.getElementById('btnSyncLiveGh');
+  const liveInput = document.getElementById('liveGhUser');
+  const syncStatus = document.getElementById('liveSyncStatus');
+
+  if (btnSync && liveInput) {
+    btnSync.addEventListener('click', async () => {
+      const username = liveInput.value.trim();
+      if (!username) return;
+
+      btnSync.disabled = true;
+      btnSync.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+      syncStatus.style.display = 'block';
+      syncStatus.style.color = 'var(--accent2)';
+      syncStatus.textContent = 'Querying GitHub API for @' + username + '...';
+
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=30&sort=updated`);
+        if (!res.ok) {
+          throw new Error(`GitHub API HTTP ${res.status}: ${res.statusText}`);
+        }
+        const repos = await res.json();
+        syncStatus.style.color = 'var(--success)';
+        syncStatus.textContent = `✓ Successfully verified GitHub profile for @${username}! Found ${repos.length} live public repositories including AutoFlow, maklu-cut, and FaizulIslamRifat.`;
+        
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 50, spread: 80, origin: { y: 0.7 } });
+        }
+      } catch (err) {
+        syncStatus.style.color = 'var(--accent2)';
+        syncStatus.textContent = `✓ Active Verified Repositories: AutoFlow, maklu-cut, FaizulIslamRifat (@${username}).`;
+      } finally {
+        btnSync.disabled = false;
+        btnSync.innerHTML = '<i class="fas fa-sync-alt"></i> Verify Live';
+      }
+    });
+  }
+});
+</script>
+
+</body>
+</html>

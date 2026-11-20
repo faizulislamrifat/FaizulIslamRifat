@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script>
+  (function() {
+    try {
+      let _fetch = window.fetch;
+      const def = { get() { return _fetch; }, set(fn) { _fetch = fn; }, configurable: true, enumerable: true };
+      Object.defineProperty(window, 'fetch', def);
+      if (typeof Window !== 'undefined' && Window.prototype) {
+        Object.defineProperty(Window.prototype, 'fetch', def);
+      }
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.setAttribute('data-lang', 'en');
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services & Solutions — Faizul Islam Rifat</title>
+<meta name="description" content="Professional digital services by Faizul Islam Rifat — Landing page design, YouTube growth, video editing, paid advertising, and e-commerce stores.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* Services Page Specific Styles */
+.services-detailed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 32px;
+  margin-bottom: 80px;
+}
+.svc-card {
+  padding: 38px 32px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), border-color var(--transition);
+}
+.svc-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--border-glass-glow);
+}
+.svc-icon-wrapper {
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.svc-card h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.svc-card p.svc-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.svc-meta-box {
+  background: rgba(0,0,0,0.18);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+.svc-meta-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+.svc-meta-row:last-child { margin-bottom: 0; }
+.svc-meta-row strong { color: var(--text-primary); }
+
+.svc-deliverables {
+  list-style: none;
+  border-top: 1px solid var(--border-glass);
+  padding-top: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.svc-deliverables li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.svc-deliverables li i { color: var(--accent2); font-size: 0.8rem; }
+
+/* Pricing Packages Tiers */
+.pricing-section { margin-bottom: 80px; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+.pricing-card {
+  padding: 40px 32px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition);
+}
+.pricing-card:hover { transform: translateY(-8px); }
+.pricing-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(124,92,252,0.12), rgba(0,229,255,0.06));
+  box-shadow: 0 12px 40px var(--accent-glow);
+}
+.pricing-badge-popular {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 30px;
+  letter-spacing: 0.5px;
+}
+.tier-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+.tier-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px; }
+.tier-price {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+}
+.tier-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+.tier-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+.tier-features li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tier-features li i { color: var(--success); font-size: 0.85rem; }
+
+/* Workflow Steps */
+.workflow-section { margin-bottom: 80px; }
+.process-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.process-item {
+  padding: 28px 22px;
+  text-align: center;
+  border-radius: var(--radius);
+}
+.process-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(124,92,252,0.15);
+  border: 1px solid var(--border-glass-glow);
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.process-item h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.process-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* Guarantees Box */
+.guarantees-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 80px;
+}
+.guarantee-box {
+  padding: 24px;
+  text-align: center;
+}
+.guarantee-box i { font-size: 2rem; color: var(--accent2); margin-bottom: 12px; }
+.guarantee-box h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.guarantee-box p { font-size: 0.84rem; color: var(--text-muted); }
+
+/* FAQ Accordion */
+.faq-wrap { max-width: 850px; margin: 0 auto 80px; }
+.faq-item { margin-bottom: 14px; border-radius: var(--radius-sm); overflow: hidden; }
+.faq-question {
+  width: 100%; padding: 20px 24px;
+  background: var(--bg-glass); border: 1px solid var(--border-glass);
+  color: var(--text-primary); font-size: 1.05rem; font-weight: 600;
+  text-align: left; display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; transition: all var(--transition); font-family: var(--font-main);
+}
+.faq-question:hover { background: var(--bg-glass-hover); border-color: var(--border-glass-glow); }
+.faq-question i { color: var(--accent); transition: transform var(--transition); }
+.faq-item.active .faq-question i { transform: rotate(180deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+  background: rgba(0,0,0,0.15); padding: 0 24px;
+  color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;
+}
+.faq-item.active .faq-answer { max-height: 250px; padding: 20px 24px; border-top: 1px solid var(--border-glass); }
+
+@media (max-width: 768px) {
+  .services-detailed-grid,
+  .pricing-grid,
+  .process-list,
+  .guarantees-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .svc-card {
+    padding: 24px 18px !important;
+  }
+  .pricing-card {
+    padding: 30px 18px !important;
+  }
+  .process-item {
+    padding: 22px 16px !important;
+  }
+  .guarantee-box {
+    padding: 20px 16px !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="mesh-bg"><div class="orb"></div></div>
+
+<!-- ============================================================
+     KHALID FARHAN STYLE HEADER
+     ============================================================ -->
+<header class="kf-header" id="header">
+  <div class="kf-nav-container">
+    <a href="index.html" class="kf-brand">
+      <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+    </a>
+
+    <!-- Navigation Links (Khalid Farhan Style) -->
+    <ul class="kf-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="projects.html">Case Studies</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="github-projects.html">GitHub Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Header Actions -->
+    <div class="kf-header-actions">
+      <a href="contact.html#scheduler" class="kf-cta-btn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Book A Call</span>
+      </a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open Mobile Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer (Khalid Farhan Style) -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="services.html" class="active">Services & Packages</a>
+  <a href="projects.html">Case Studies & Work</a>
+  <a href="skills.html">Skills & Stack</a>
+  <a href="github-projects.html">GitHub Projects</a>
+  <a href="contact.html">Contact & Booking</a>
+  <a href="contact.html#scheduler" class="btn btn-primary" style="margin-top:10px;"><i class="fas fa-calendar-alt"></i> Book A Call</a>
+</div>
+
+<!-- Main Container -->
+<main class="container">
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="badge">
+      <i class="fas fa-cogs"></i>
+      <span data-i18n="services_hero_badge">High-Impact Deliverables</span>
+    </div>
+    <h1 class="section-title" data-i18n="services_hero_title">Services Engineered to <span class="accent">Grow Your Brand</span></h1>
+    <p class="section-subtitle" data-i18n="services_hero_subtitle">End-to-end creative, development, and marketing solutions tailored to produce measurable revenue and audience reach.</p>
+    <div style="display:flex; justify-content:center; width:100%;">
+      <div class="breadcrumbs">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span data-i18n="nav_services">Services</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed 6 Services Grid -->
+  <section class="services-detailed-grid reveal">
+    
+    <!-- Service 1 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fas fa-laptop-code"></i></div>
+      <h3 data-i18n="s1_title">Landing Page & Web Design</h3>
+      <p class="svc-desc" data-i18n="s1_desc">High-speed, conversion-focused websites and landing pages built with WordPress and Elementor Pro, designed to turn traffic into paying leads.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>3–5 Business Days</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>Course Creators, Agencies, Startups</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s1_del1">Mobile-First 100% Responsive Architecture</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s1_del2">PageSpeed 90+ Score Guarantee</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s1_del3">Lead Form & CRM Integration (Mailchimp/Zapier)</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s1_del4">On-Page Technical SEO Setup</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fab fa-youtube"></i></div>
+      <h3 data-i18n="s2_title">YouTube SEO & Growth Engine</h3>
+      <p class="svc-desc" data-i18n="s2_desc">Comprehensive channel audit, high-CTR thumbnail design, keyword strategy, and video metadata optimization to ignite YouTube algorithmic recommendations.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>Monthly / Per Video</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>YouTubers, Businesses, Thought Leaders</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s2_del1">High-CTR Custom Thumbnail Design (Photoshop)</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s2_del2">High-Volume Search Keyword & Tag Mapping</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s2_del3">First 30-Second Viewer Retention Auditing</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s2_del4">Competitor & Trend Analysis with VidIQ</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fas fa-hashtag"></i></div>
+      <h3 data-i18n="s3_title">Social Media Branding System</h3>
+      <p class="svc-desc" data-i18n="s3_desc">Unified visual presence across Instagram, Facebook, and LinkedIn. Includes brand guidelines, post templates, and a 30-day viral content blueprint.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>5–7 Business Days</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>E-Commerce, Personal Brands, Local Shops</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s3_del1">Cohesive Visual Color Palette & Typography Guide</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s3_del2">15+ Editable Social Post & Carousel Templates</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s3_del3">30-Day Content Publishing Calendar</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s3_del4">Bio & Profile Optimization Across All Channels</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fas fa-film"></i></div>
+      <h3 data-i18n="s4_title">Cinematic Video Editing</h3>
+      <p class="svc-desc" data-i18n="s4_desc">Professional editing for YouTube, commercial ads, podcast cuts, and short-form Reels with Hollywood-grade color grading and punchy sound design.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>24–72 Hours</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>Creators, Coaches, Advertisers, Podcasters</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s4_del1">Dynamic Sound Design, Foley & Background Music</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s4_del2">DaVinci Resolve Node Color Grading</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s4_del3">Kinetic Subtitles & Lower Third Motion Graphics</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s4_del4">Multi-Platform Cutdowns (16:9, 9:16, 1:1)</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fas fa-bullseye"></i></div>
+      <h3 data-i18n="s5_title">Paid Performance Advertising</h3>
+      <p class="svc-desc" data-i18n="s5_desc">High-ROI Facebook and Instagram ad funnels built on audience psychology, pixel tracking, and continuous split testing to maximize your return on ad spend.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>Monthly Management</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>E-Commerce, Academies, B2B, Real Estate</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s5_del1">Meta Pixel & Conversions API (CAPI) Integration</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s5_del2">Cold, Warm & Hot Retargeting Funnel Setup</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s5_del3">Persuasive Direct-Response Ad Copywriting</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s5_del4">Weekly Transparent ROAS & Metrics Reporting</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+    <!-- Service 6 -->
+    <div class="svc-card glass">
+      <div class="svc-icon-wrapper"><i class="fas fa-shopping-bag"></i></div>
+      <h3 data-i18n="s6_title">E-Commerce Solutions & Local Pay</h3>
+      <p class="svc-desc" data-i18n="s6_desc">Complete WooCommerce storefront setup equipped with one-click bKash, Nagad, and Rocket payment flows, abandoned cart emails, and order management.</p>
+      <div class="svc-meta-box">
+        <div class="svc-meta-row"><span>Timeline:</span> <strong>7–10 Business Days</strong></div>
+        <div class="svc-meta-row"><span>Best For:</span> <strong>Clothing Brands, Gadget Shops, Organic Foods</strong></div>
+      </div>
+      <ul class="svc-deliverables">
+        <li><i class="fas fa-check"></i> <span data-i18n="s6_del1">Instant bKash, Nagad & SSLCommerz Integration</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s6_del2">Streamlined 1-Page Checkout Flow</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s6_del3">Automated Invoice & WhatsApp Order Alerts</span></li>
+        <li><i class="fas fa-check"></i> <span data-i18n="s6_del4">Full Product Catalog & Inventory Setup</span></li>
+      </ul>
+      <a href="contact.html" class="btn btn-outline btn-sm" data-i18n="btn_book_svc">Get a Quote</a>
+    </div>
+
+  </section>
+
+  <!-- Pricing Packages Section -->
+  <section class="pricing-section reveal">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="pricing_title">Tailored Service <span class="accent">Packages</span></h2>
+      <p class="section-subtitle" data-i18n="pricing_subtitle">Transparent, value-driven plans customized for where you are in your growth journey.</p>
+    </div>
+    <div class="pricing-grid">
+      
+      <!-- Tier 1 -->
+      <div class="pricing-card glass">
+        <div class="tier-name" data-i18n="tier1_name">Starter Creator</div>
+        <div class="tier-desc" data-i18n="tier1_desc">Ideal for emerging creators and single project needs.</div>
+        <div class="tier-price">$149 <span>/ project</span></div>
+        <ul class="tier-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="t1_f1">1 High-Converting Landing Page OR 4 Edited Videos</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t1_f2">Custom Sound Design & Color Grading</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t1_f3">Basic SEO & Speed Optimization</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t1_f4">2 Rounds of Revisions</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t1_f5">Direct WhatsApp Support</span></li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline" data-i18n="btn_choose_plan">Choose Starter</a>
+      </div>
+
+      <!-- Tier 2 (Featured) -->
+      <div class="pricing-card glass featured">
+        <span class="pricing-badge-popular">MOST POPULAR</span>
+        <div class="tier-name" data-i18n="tier2_name">Growth Brand</div>
+        <div class="tier-desc" data-i18n="tier2_desc">For scaling businesses seeking serious online expansion.</div>
+        <div class="tier-price">$399 <span>/ month</span></div>
+        <ul class="tier-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f1">10 Short-Form Reels OR 4 Long-form YouTube Videos</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f2">High-CTR Custom Thumbnail Suite</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f3">Full Landing Page Setup & Maintenance</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f4">Facebook & Instagram Ad Campaign Setup</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f5">Unlimited Minor Revisions</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t2_f6">Priority 2-Hour Response Time</span></li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary" data-i18n="btn_choose_plan">Choose Growth</a>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="pricing-card glass">
+        <div class="tier-name" data-i18n="tier3_name">Elite Enterprise</div>
+        <div class="tier-desc" data-i18n="tier3_desc">Full-scale digital partner for comprehensive brand domination.</div>
+        <div class="tier-price">$799+ <span>/ month</span></div>
+        <ul class="tier-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="t3_f1">Complete Content Production Engine (Video + Design)</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t3_f2">Custom WooCommerce E-Commerce Platform Build</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t3_f3">Full Paid Marketing Funnel Management (Meta + Google)</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t3_f4">Weekly Strategy & Analytics Reviews</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="t3_f5">Dedicated 1-on-1 Direct Access</span></li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline" data-i18n="btn_choose_plan">Choose Enterprise</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5-Step Process -->
+  <section class="workflow-section reveal">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="process_title">The 5-Step <span class="accent">Collaboration Process</span></h2>
+      <p class="section-subtitle" data-i18n="process_subtitle">A transparent, hassle-free roadmap from our first hello to measurable success.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-item glass">
+        <div class="process-num">1</div>
+        <h4 data-i18n="pr1_title">Discovery Call</h4>
+        <p data-i18n="pr1_desc">We discuss your vision, current bottlenecks, target audience, and project expectations.</p>
+      </div>
+      <div class="process-item glass">
+        <div class="process-num">2</div>
+        <h4 data-i18n="pr2_title">Proposal & Strategy</h4>
+        <p data-i18n="pr2_desc">You receive a clear scope of work, timeline, deliverables, and transparent pricing.</p>
+      </div>
+      <div class="process-item glass">
+        <div class="process-num">3</div>
+        <h4 data-i18n="pr3_title">Execution & Draft</h4>
+        <p data-i18n="pr3_desc">I dive into video editing, coding, or ad setup, keeping you updated with progress previews.</p>
+      </div>
+      <div class="process-item glass">
+        <div class="process-num">4</div>
+        <h4 data-i18n="pr4_title">Feedback & Polish</h4>
+        <p data-i18n="pr4_desc">We review the first delivery together and refine until everything is 100% aligned.</p>
+      </div>
+      <div class="process-item glass">
+        <div class="process-num">5</div>
+        <h4 data-i18n="pr5_title">Launch & Scale</h4>
+        <p data-i18n="pr5_desc">Final high-resolution delivery or website go-live, followed by analytics tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guarantees Grid -->
+  <section class="guarantees-grid reveal">
+    <div class="guarantee-box glass">
+      <i class="fas fa-clock"></i>
+      <h4 data-i18n="g1_title">Strict Deadlines</h4>
+      <p data-i18n="g1_desc">Your deliverables arrive on time, every single time. No excuses.</p>
+    </div>
+    <div class="guarantee-box glass">
+      <i class="fas fa-comments"></i>
+      <h4 data-i18n="g2_title">Fast Communication</h4>
+      <p data-i18n="g2_desc">Direct updates via WhatsApp and Telegram with sub-2 hour replies.</p>
+    </div>
+    <div class="guarantee-box glass">
+      <i class="fas fa-shield-alt"></i>
+      <h4 data-i18n="g3_title">100% Ownership</h4>
+      <p data-i18n="g3_desc">You own all raw video project files, website code, and ad creatives.</p>
+    </div>
+    <div class="guarantee-box glass">
+      <i class="fas fa-redo"></i>
+      <h4 data-i18n="g4_title">Satisfaction Assured</h4>
+      <p data-i18n="g4_desc">Dedicated revision rounds to ensure the final product exceeds expectations.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section reveal">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="services_faq_title">Service <span class="accent">Inquiries</span></h2>
+      <p class="section-subtitle" data-i18n="services_faq_sub">Got questions about booking, payments, or custom scopes? Find quick answers below.</p>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span data-i18n="sfaq1_q">Can I request a custom package that combines only the services I need?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer" data-i18n="sfaq1_a">
+          Absolutely! Most clients have unique requirements. Simply contact me via WhatsApp or the contact form, describe what you need, and I will prepare a customized quote tailored exactly to your scope and budget.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span data-i18n="sfaq2_q">What payment methods do you accept?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer" data-i18n="sfaq2_a">
+          For clients within Bangladesh, I accept bKash, Nagad, and direct bank transfers. For international clients, I accept Payoneer, Wise, direct wire transfer, and cryptocurrency.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span data-i18n="sfaq3_q">How do we share large video files and creative assets?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer" data-i18n="sfaq3_a">
+          We use Google Drive, Dropbox, or Frame.io for seamless file transfers and frame-accurate timestamped feedback on video cuts.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span data-i18n="sfaq4_q">Do you provide ongoing monthly support after website delivery?</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer" data-i18n="sfaq4_a">
+          Yes! Every website includes 30 days of free post-launch bug fixes and support. Beyond that, I offer affordable monthly maintenance packages to keep your website updated, secure, and fast.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner reveal">
+    <div class="badge" style="margin-bottom:12px;" data-i18n="cta_badge">Ready to Start?</div>
+    <h2 data-i18n="services_cta_title">Let's Build Something Exceptional Together</h2>
+    <p data-i18n="services_cta_desc">Tell me about your project goals and let's craft a tailored solution that drives real business impact.</p>
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <a href="contact.html#scheduler" class="btn btn-primary" data-i18n="cta_btn">Book a Consultation</a>
+      <a href="projects.html" class="btn btn-outline" data-i18n="nav_projects">Review Case Studies</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     KHALID FARHAN 4-COLUMN FOOTER
+     ============================================================ -->
+<footer class="kf-footer">
+  <div class="container">
+    <div class="kf-footer-grid">
+      
+      <!-- Col 1: Brand & Socials -->
+      <div class="kf-footer-col">
+        <a href="index.html" class="kf-brand" style="margin-bottom:16px;">
+          <div class="kf-brand-logo">Faizul Islam <span>Rifat</span></div>
+        </a>
+        <p class="kf-footer-bio">
+          Multi-disciplinary content creator, digital marketer, and web specialist helping modern creators and businesses scale through high-retention video production and profitable digital funnels.
+        </p>
+        <div class="kf-social-links">
+          <a href="https://www.facebook.com/faizulislamxifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/iamfaizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/faizul_rifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://github.com/faizulislamrifat" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://wa.me/8801834581975" target="_blank" rel="noopener noreferrer" class="kf-social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div class="kf-footer-col">
+        <h4>Navigation</h4>
+        <ul class="kf-footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+          <li><a href="services.html">Services & Packages</a></li>
+          <li><a href="projects.html">Case Studies & Work</a></li>
+          <li><a href="skills.html">Skills & Stack</a></li>
+          <li><a href="github-projects.html">GitHub Projects</a></li>
+          <li><a href="contact.html">Contact & Booking</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Core Solutions -->
+      <div class="kf-footer-col">
+        <h4>Core Solutions</h4>
+        <ul class="kf-footer-links">
+          <li><a href="services.html">Cinematic Video Editing</a></li>
+          <li><a href="services.html">Short-Form Hooks & Reels</a></li>
+          <li><a href="services.html">Meta & Google Ad Funnels</a></li>
+          <li><a href="services.html">YouTube Channel Growth</a></li>
+          <li><a href="services.html">High-Speed Web Platforms</a></li>
+          <li><a href="contact.html#scheduler">1-on-1 Consultation Call</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Direct Inquiries & Booking -->
+      <div class="kf-footer-col">
+        <h4>Direct Connect</h4>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          <strong>Email:</strong> info.faizulislamrifat@gmail.com
+        </p>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.6; margin-bottom:16px;">
+          <strong>Location:</strong> Dhaka, Bangladesh (GMT+6)
+        </p>
+        <a href="contact.html#scheduler" class="btn btn-outline btn-sm" style="width:100%; justify-content:center; border-color:var(--accent);">
+          <i class="fas fa-calendar-alt"></i> Book A Strategy Call
+        </a>
+      </div>
+
+    </div>
+
+            <!-- Bottom Bar (Strict Single-Line Alignment) -->
+    <div class="kf-bottom-bar">
+      <div class="kf-bottom-copy">&copy; 2026 Faizul Islam Rifat. All rights reserved.</div>
+      <div class="kf-bottom-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="kf-bullet">•</span>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <span class="kf-bullet">•</span>
+        <a href="github-projects.html">GitHub Projects</a>
+        <span class="kf-bullet">•</span>
+        <a href="about.html" class="kf-verified-tag">Verified Portfolio</a>
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="shared.js"></script>
+<script>
+// Translations for Services Page
+window.pageTranslations = {
+  en: {
+    services_hero_badge: "High-Impact Deliverables",
+    services_hero_title: 'Services Engineered to <span class="accent">Grow Your Brand</span>',
+    services_hero_subtitle: "End-to-end creative, development, and marketing solutions tailored to produce measurable revenue and audience reach.",
+    s1_title: "Landing Page & Web Design",
+    s1_desc: "High-speed, conversion-focused websites and landing pages built with WordPress and Elementor Pro, designed to turn traffic into paying leads.",
+    s1_del1: "Mobile-First 100% Responsive Architecture",
+    s1_del2: "PageSpeed 90+ Score Guarantee",
+    s1_del3: "Lead Form & CRM Integration (Mailchimp/Zapier)",
+    s1_del4: "On-Page Technical SEO Setup",
+    s2_title: "YouTube SEO & Growth Engine",
+    s2_desc: "Comprehensive channel audit, high-CTR thumbnail design, keyword strategy, and video metadata optimization to ignite YouTube algorithmic recommendations.",
+    s2_del1: "High-CTR Custom Thumbnail Design (Photoshop)",
+    s2_del2: "High-Volume Search Keyword & Tag Mapping",
+    s2_del3: "First 30-Second Viewer Retention Auditing",
+    s2_del4: "Competitor & Trend Analysis with VidIQ",
+    s3_title: "Social Media Branding System",
+    s3_desc: "Unified visual presence across Instagram, Facebook, and LinkedIn. Includes brand guidelines, post templates, and a 30-day viral content blueprint.",
+    s3_del1: "Cohesive Visual Color Palette & Typography Guide",
+    s3_del2: "15+ Editable Social Post & Carousel Templates",
+    s3_del3: "30-Day Content Publishing Calendar",
+    s3_del4: "Bio & Profile Optimization Across All Channels",
+    s4_title: "Cinematic Video Editing",
+    s4_desc: "Professional editing for YouTube, commercial ads, podcast cuts, and short-form Reels with Hollywood-grade color grading and punchy sound design.",
+    s4_del1: "Dynamic Sound Design, Foley & Background Music",
+    s4_del2: "DaVinci Resolve Node Color Grading",
+    s4_del3: "Kinetic Subtitles & Lower Third Motion Graphics",
+    s4_del4: "Multi-Platform Cutdowns (16:9, 9:16, 1:1)",
+    s5_title: "Paid Performance Advertising",
+    s5_desc: "High-ROI Facebook and Instagram ad funnels built on audience psychology, pixel tracking, and continuous split testing to maximize your return on ad spend.",
+    s5_del1: "Meta Pixel & Conversions API (CAPI) Integration",
+    s5_del2: "Cold, Warm & Hot Retargeting Funnel Setup",
+    s5_del3: "Persuasive Direct-Response Ad Copywriting",
+    s5_del4: "Weekly Transparent ROAS & Metrics Reporting",
+    s6_title: "E-Commerce Solutions & Local Pay",
+    s6_desc: "Complete WooCommerce storefront setup equipped with one-click bKash, Nagad, and Rocket payment flows, abandoned cart emails, and order management.",
+    s6_del1: "Instant bKash, Nagad & SSLCommerz Integration",
+    s6_del2: "Streamlined 1-Page Checkout Flow",
+    s6_del3: "Automated Invoice & WhatsApp Order Alerts",
+    s6_del4: "Full Product Catalog & Inventory Setup",
+    btn_book_svc: "Get a Quote",
+    pricing_title: 'Tailored Service <span class="accent">Packages</span>',
+    pricing_subtitle: "Transparent, value-driven plans customized for where you are in your growth journey.",
+    tier1_name: "Starter Creator",
+    tier1_desc: "Ideal for emerging creators and single project needs.",
+    t1_f1: "1 High-Converting Landing Page OR 4 Edited Videos",
+    t1_f2: "Custom Sound Design & Color Grading",
+    t1_f3: "Basic SEO & Speed Optimization",
+    t1_f4: "2 Rounds of Revisions",
+    t1_f5: "Direct WhatsApp Support",
+    tier2_name: "Growth Brand",
+    tier2_desc: "For scaling businesses seeking serious online expansion.",
+    t2_f1: "10 Short-Form Reels OR 4 Long-form YouTube Videos",
+    t2_f2: "High-CTR Custom Thumbnail Suite",
+    t2_f3: "Full Landing Page Setup & Maintenance",
+    t2_f4: "Facebook & Instagram Ad Campaign Setup",
+    t2_f5: "Unlimited Minor Revisions",
+    t2_f6: "Priority 2-Hour Response Time",
+    tier3_name: "Elite Enterprise",
+    tier3_desc: "Full-scale digital partner for comprehensive brand domination.",
+    t3_f1: "Complete Content Production Engine (Video + Design)",
+    t3_f2: "Custom WooCommerce E-Commerce Platform Build",
+    t3_f3: "Full Paid Marketing Funnel Management (Meta + Google)",
+    t3_f4: "Weekly Strategy & Analytics Reviews",
+    t3_f5: "Dedicated 1-on-1 Direct Access",
+    btn_choose_plan: "Choose Plan",
+    process_title: 'The 5-Step <span class="accent">Collaboration Process</span>',
+    process_subtitle: "A transparent, hassle-free roadmap from our first hello to measurable success.",
+    pr1_title: "Discovery Call",
+    pr1_desc: "We discuss your vision, current bottlenecks, target audience, and project expectations.",
+    pr2_title: "Proposal & Strategy",
+    pr2_desc: "You receive a clear scope of work, timeline, deliverables, and transparent pricing.",
+    pr3_title: "Execution & Draft",
+    pr3_desc: "I dive into video editing, coding, or ad setup, keeping you updated with progress previews.",
+    pr4_title: "Feedback & Polish",
+    pr4_desc: "We review the first delivery together and refine until everything is 100% aligned.",
+    pr5_title: "Launch & Scale",
+    pr5_desc: "Final high-resolution delivery or website go-live, followed by analytics tracking.",
+    g1_title: "Strict Deadlines",
+    g1_desc: "Your deliverables arrive on time, every single time. No excuses.",
+    g2_title: "Fast Communication",
+    g2_desc: "Direct updates via WhatsApp and Telegram with sub-2 hour replies.",
+    g3_title: "100% Ownership",
+    g3_desc: "You own all raw video project files, website code, and ad creatives.",
+    g4_title: "Satisfaction Assured",
+    g4_desc: "Dedicated revision rounds to ensure the final product exceeds expectations.",
+    services_faq_title: 'Service <span class="accent">Inquiries</span>',
+    services_faq_sub: "Got questions about booking, payments, or custom scopes? Find quick answers below.",
+    sfaq1_q: "Can I request a custom package that combines only the services I need?",
+    sfaq1_a: "Absolutely! Most clients have unique requirements. Simply contact me via WhatsApp or the contact form, describe what you need, and I will prepare a customized quote tailored exactly to your scope and budget.",
+    sfaq2_q: "What payment methods do you accept?",
+    sfaq2_a: "For clients within Bangladesh, I accept bKash, Nagad, and direct bank transfers. For international clients, I accept Payoneer, Wise, direct wire transfer, and cryptocurrency.",
+    sfaq3_q: "How do we share large video files and creative assets?",
+    sfaq3_a: "We use Google Drive, Dropbox, or Frame.io for seamless file transfers and frame-accurate timestamped feedback on video cuts.",
+    sfaq4_q: "Do you provide ongoing monthly support after website delivery?",
+    sfaq4_a: "Yes! Every website includes 30 days of free post-launch bug fixes and support. Beyond that, I offer affordable monthly maintenance packages to keep your website updated, secure, and fast.",
+    services_cta_title: "Let's Build Something Exceptional Together",
+    services_cta_desc: "Tell me about your project goals and let's craft a tailored solution that drives real business impact."
+  },
+  };
+
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const parent = this.parentElement;
+    const isActive = parent.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+    if (!isActive) parent.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

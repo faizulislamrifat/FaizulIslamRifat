@@ -1,0 +1,14 @@
+[
+  {
+    "id": "sub_init_sample",
+    "email": "demo.subscriber@example.com",
+    "timestamp": "2026-11-01T10:00:00.000Z",
+    "source": "footer-welcome"
+  },
+  {
+    "id": "sub_1793788990884_g1gbr",
+    "email": "test.creator@gmail.com",
+    "timestamp": "2026-11-04T10:43:10.884Z",
+    "source": "footer"
+  }
+]
